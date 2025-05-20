@@ -1,13 +1,45 @@
-import React from 'react';
-import { Link, NavLink } from 'react-router';
+import React, { use } from 'react';
+import { Link, NavLink} from 'react-router';
+import { AuthContext } from '../../Context/AuthContext';
+import { signOut } from 'firebase/auth';
+import { auth } from '../../Firebase/Firebase';
+import './nav.css'
+import Swal from 'sweetalert2';
 
 const Navbar = () => {
+   
+    const userInfo = use(AuthContext);
+    const { user } = userInfo;
 
+    console.log(user?.displayName)
+    console.log(user?.photoURL)
+
+    const handleLogOut = () => {
+        signOut(auth)
+            .then(() => {
+                Swal.fire({
+                    title: "Logout Successful",
+                    icon: "success",
+                    draggable: true
+                });
+            })
+            .catch(() => {
+                Swal.fire({
+                    title: "Something went wrong",
+                    icon: "error",
+                    draggable: true
+                });
+            })
+    }
+
+    // console.log(user)
     const links = <>
-        <NavLink><li><a>Home</a></li></NavLink>
-        <NavLink><li><a>All Recipes</a></li></NavLink>
-        <NavLink><li><a>Add Recipe</a></li></NavLink>
-        <NavLink><li><a>My Recipes</a></li></NavLink>
+        <NavLink to={'/'}><li>Home</li></NavLink>
+        <NavLink to={'/all-recipe'}><li>All Recipes</li></NavLink>
+       {
+        user &&  <NavLink to={'/add-recipe'}><li>Add Recipe</li></NavLink>
+       }
+        <NavLink to={'/my-recipe'}><li>My Recipes</li></NavLink>
     </>
 
     return (
@@ -27,13 +59,28 @@ const Navbar = () => {
                     <a className=" text-3xl font-bold text-yellow-400">Yummiary</a>
                 </div>
                 <div className="navbar-center hidden lg:flex">
-                    <ul className="menu menu-horizontal px-1">
+                    <ul className="menu menu-horizontal gap-8 px-1">
                         {links}
                     </ul>
                 </div>
                 <div className="navbar-end gap-2">
-                    <Link to={'/login'}><button className="btn bg-yellow-400 text-white font-bold">Login</button></Link>
-                    <Link to={'/register'}><button className="btn bg-yellow-400 text-white font-bold">Register</button></Link>
+                    {
+                        user ?
+
+                            <div className='flex items-center gap-2'>
+                                {
+                                    user?.photoURL && <img className='w-10 h-10 rounded-full' src={user?.photoURL} alt="" />
+                                }
+                                
+                                <button onClick={handleLogOut} className="btn bg-yellow-400 text-white font-bold">Logout</button>
+                            </div>
+
+                            :
+                            <div>
+                                <Link to={'/login'}><button className="btn bg-yellow-400 text-white font-bold">Login</button></Link>
+                                <Link to={'/register'}><button className="btn bg-yellow-400 text-white font-bold">Register</button></Link>
+                            </div>
+                    }
                 </div>
             </div>
         </div>

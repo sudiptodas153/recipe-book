@@ -3,6 +3,8 @@ import Root from "../Root/Root";
 import Home from "../Components/Home/Home";
 import Login from "../Components/Login/Login";
 import Register from "../Components/Register/Register";
+import AddRecipe from "../Components/AddRecipe/AddRecipe";
+import ErrorPage from "../Components/ErrorPage/ErrorPage";
 
 
 
@@ -10,6 +12,7 @@ export const router = createBrowserRouter([
     {
         path: "/",
         Component: Root,
+        errorElement: <ErrorPage></ErrorPage>,
         children: [
             {
                 index: true,
@@ -22,6 +25,10 @@ export const router = createBrowserRouter([
             {
                 path: 'register',
                 Component: Register
+            },
+            {
+                path: 'add-recipe',
+                Component: AddRecipe
             }
         ]
     },
