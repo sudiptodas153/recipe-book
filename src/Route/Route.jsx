@@ -5,6 +5,8 @@ import Login from "../Components/Login/Login";
 import Register from "../Components/Register/Register";
 import AddRecipe from "../Components/AddRecipe/AddRecipe";
 import ErrorPage from "../Components/ErrorPage/ErrorPage";
+import MyRecipes from "../Components/MyRecipes/MyRecipes";
+import RecipeDetails from "../Components/RecipeDetails/RecipeDetails";
 
 
 
@@ -16,6 +18,7 @@ export const router = createBrowserRouter([
         children: [
             {
                 index: true,
+                loader: ()=>fetch('http://localhost:3000/top-recipes'),
                 Component: Home
             },
             {
@@ -29,6 +32,15 @@ export const router = createBrowserRouter([
             {
                 path: 'add-recipe',
                 Component: AddRecipe
+            },
+            {
+                path: 'my-recipes',
+                loader: ()=>fetch('http://localhost:3000/recipes'),
+                Component: MyRecipes
+            },
+            {
+                path: 'recipe/:id',
+                Component: RecipeDetails
             }
         ]
     },

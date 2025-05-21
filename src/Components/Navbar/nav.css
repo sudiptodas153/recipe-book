@@ -1,6 +1,7 @@
 .active{
-    background-color: rgb(236, 236, 67);
+    background-color: rgb(231, 231, 2);
     padding: 5px;
     border-radius: 5px;
-    font-size: 700;
+    font-size: 900;
+    color: white;
 }

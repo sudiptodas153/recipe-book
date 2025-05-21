@@ -11,8 +11,8 @@ const Navbar = () => {
     const userInfo = use(AuthContext);
     const { user } = userInfo;
 
-    console.log(user?.displayName)
-    console.log(user?.photoURL)
+    // console.log(user?.displayName)
+    // console.log(user?.photoURL)
 
     const handleLogOut = () => {
         signOut(auth)
@@ -39,11 +39,11 @@ const Navbar = () => {
        {
         user &&  <NavLink to={'/add-recipe'}><li>Add Recipe</li></NavLink>
        }
-        <NavLink to={'/my-recipe'}><li>My Recipes</li></NavLink>
+        <NavLink to={'/my-recipes'}><li>My Recipes</li></NavLink>
     </>
 
     return (
-        <div className='container mx-auto px-2'>
+        <div className='w-11/12 mx-auto px-2'>
             <div className="navbar bg-base-100 shadow-sm">
                 <div className="navbar-start">
                     <div className="dropdown">
