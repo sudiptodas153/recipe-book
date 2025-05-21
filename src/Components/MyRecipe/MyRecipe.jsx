@@ -93,27 +93,34 @@ const MyRecipe = ({ recipe, storeRecipe, setRecipe }) => {
         <div className=''>
             <div>
                 {userEmail === user.email ?
-                    <div className="card border border-gray-300  w-96 shadow-sm p-3">
+                    <div className="card border border-gray-300  shadow-sm p-5">
 
                         <img
                             src={photo}
                             alt="food"
-                            className="rounded-xl h-60 " />
+                            className="rounded-xl md:h-72 " />
 
-                        <div className=" mt-4">
-                            <h2 className="text-2xl font-bold">{name}</h2>
+                        <div className=" mt-4 space-y-2">
+                            <h2 className="text-3xl font-bold">{name}</h2>
                             <div className='flex items-center justify-between'>
-                                <p>{cuisine}</p>
-                                <p>Like: {like}</p>
+                                <p className='text-xl font-semibold'>Cuisine: <span className='text-lg font-medium'>{cuisine}</span></p>
+                                <p className='text-xl font-semibold'>Like: <span className='text-lg font-medium'>{like}</span></p>
                             </div>
                             <div className='flex items-center justify-between'>
-                                <p>{Ingredients}</p>
-                                <p>{Instructions}</p>
+                                <p className='text-xl font-semibold'>Category: <span className='text-lg font-medium'>{category}</span></p>
+                                <p className='text-xl font-semibold'>Time: <span className='text-lg font-medium'>{time} min</span></p>
                             </div>
-                            <div className='flex items-center justify-between'>
-                                <p>Category: {category}</p>
-                                <p>{time} min</p>
+                            <div className=''>
+                                <div>
+                                    <h2 className='text-xl font-bold'>Ingredients:</h2>
+                                    <p>{Ingredients}</p>
+                                </div>
+                                <div>
+                                    <h2 className='text-xl font-bold mt-2'>Instructions:</h2>
+                                    <p>{Instructions}</p>
+                                </div>
                             </div>
+
                             <div className=" mt-2 flex justify-between">
 
                                 {/* You can open the modal using document.getElementById('ID').showModal() method */}

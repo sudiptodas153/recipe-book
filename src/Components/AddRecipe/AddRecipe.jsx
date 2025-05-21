@@ -144,8 +144,8 @@ const AddRecipe = () => {
                         </div>
                     </fieldset>
 
-                    <div className='flex justify-between items-center'>
-                        <div className='flex items-center gap-2'>
+                    <div className='mt-2 space-y-2 md:flex md:justify-between md:items-center'>
+                        <div className='flex items-center gap-1'>
                             <p onClick={handleLike} className={`font-bold cursor-pointer ${liked ? ' cursor-not-allowed' : ''}`}>{likes > 0 ? <FaHeart color='red' /> : <FaRegHeart />} </p>
                             <p className='font-bold' value='0'>{likes} Like</p>
                             <input type="text" name='like' />

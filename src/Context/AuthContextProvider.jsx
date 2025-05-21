@@ -7,25 +7,29 @@ import { auth } from '../Firebase/Firebase';
 const AuthContextProvider = ({children}) => {
 
 const provider = new GoogleAuthProvider();
-
+const [loading, setLoading] = useState(true)
 const [user, setUser] = useState(null)
 
  
 
     const createUser = (email, pass) =>{
+        setLoading(true);
        return createUserWithEmailAndPassword(auth,email,pass);
     }
 
     const profileUpdate = userDetails =>{
+       
        return updateProfile(auth.currentUser, userDetails)
     }
 
 
     const signUser = (email, pass) =>{
+        setLoading(true);
        return signInWithEmailAndPassword(auth , email, pass);
     }
 
     const googleSignIn = () =>{
+        setLoading(true);
       return signInWithPopup(auth, provider);
 
     }
@@ -39,6 +43,7 @@ const [user, setUser] = useState(null)
     useEffect(()=>{
     const unSubscribe = onAuthStateChanged(auth, currentUser=>{
         setUser(currentUser);
+        setLoading(false);
     }) 
     return ()=>{
         unSubscribe();
@@ -53,6 +58,7 @@ const [user, setUser] = useState(null)
         setUser,
         signUser,
         googleSignIn,
+        loading
     }
 
     return (

@@ -23,7 +23,7 @@ const MyRecipes = () => {
                 <div >
 
                         {/* // userInf?.userEmail === user?.email ? */}
-                    <div className='grid grid-cols-1 md:grid-cols-3 gap-4 '>
+                    <div className='grid grid-cols-1 md:grid-cols-2 gap-4 '>
                         {
                             storeRecipe.map(recipe => <MyRecipe storeRecipe={storeRecipe} setRecipe={setRecipe} key={recipe._id} recipe={recipe}></MyRecipe>)
                         }
