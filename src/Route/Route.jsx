@@ -7,6 +7,7 @@ import AddRecipe from "../Components/AddRecipe/AddRecipe";
 import ErrorPage from "../Components/ErrorPage/ErrorPage";
 import MyRecipes from "../Components/MyRecipes/MyRecipes";
 import RecipeDetails from "../Components/RecipeDetails/RecipeDetails";
+import Updated from "../Components/Updated/Updated";
 
 
 
@@ -40,7 +41,13 @@ export const router = createBrowserRouter([
             },
             {
                 path: 'recipe/:id',
+                loader:({params})=>fetch(`http://localhost:3000/recipes/${params.id}`),
                 Component: RecipeDetails
+            },
+            {
+                path: 'update/:id',
+                loader:({params})=>fetch(`http://localhost:3000/recipes/${params.id}`),
+                Component: Updated
             }
         ]
     },

@@ -1,10 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router';
 
-const Recipes = ({ recipe }) => {
+const Recipes = ({ recipe}) => {
     // console.log(recipe);
 
-    const {_id, name, photo, cuisine, } = recipe;
+    const {_id, name,like, photo, cuisine, } = recipe;
 
     return (
         <div>
@@ -17,9 +17,9 @@ const Recipes = ({ recipe }) => {
 
                 <div className=" mt-4">
                     <h2 className="text-2xl font-bold">{name}</h2>
-                    <div className='flex items-center justify-between'>
-                        <p>{cuisine}</p>
-                        <p>Like:</p>
+                    <div className='flex items-center justify-between mt-3'>
+                        <p className='text-lg font-bold'>Cuisine: <span className='font-semibold'>{cuisine}</span></p>
+                        <p className='text-lg font-bold'>Like: <span className='font-semibold'>{like}</span></p>
                     </div>
                     <div className=" mt-2">
                         <Link to={`/recipe/${_id}`}>
