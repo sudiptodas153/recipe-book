@@ -1,13 +1,28 @@
-import React, { useState } from 'react';
+import React, { use, useState } from 'react';
 import { FaHeart, FaRegHeart } from 'react-icons/fa';
 // import { useNavigate } from 'react-router';
 import Swal from 'sweetalert2';
+import { AuthContext } from '../../Context/AuthContext';
+import { Link } from 'react-router';
+
 
 const MyRecipe = ({ recipe, storeRecipe, setRecipe }) => {
-    const { _id, like, name, photo, cuisine, Ingredients, Instructions, time, category } = recipe;
+    const { _id, like, name, userEmail, photo, cuisine, Ingredients, Instructions, time, category } = recipe;
     const [likes, setLikes] = useState(0);
-    // const navigate = useNavigate();
+    const [modalData, setModalData] = useState(null);
+    const [recipeName, setRecipeName] = useState('');
     const [liked, setLiked] = useState(false);
+    const { user } = use(AuthContext);
+    // const [addUser, setAddUser] = useState(null);
+
+    // const navigate = useNavigate();
+    console.log(userEmail === user?.email)
+
+
+
+
+
+
 
     const handleDelete = (_id) => {
 
@@ -21,7 +36,7 @@ const MyRecipe = ({ recipe, storeRecipe, setRecipe }) => {
             confirmButtonText: "Yes, delete it!"
         }).then((result) => {
             if (result.isConfirmed) {
-                fetch(`http://localhost:3000/recipes/${_id}`, {
+                fetch(`https://recipe-database-zeta.vercel.app/recipes/${_id}`, {
                     method: "DELETE"
                 })
                     .then(res => res.json())
@@ -58,11 +73,14 @@ const MyRecipe = ({ recipe, storeRecipe, setRecipe }) => {
 
     }
 
-    const updateProfile = (_id) => {
+    const updateProfile = (recipe) => {
+        setModalData(recipe)
+        setRecipeName(recipe?.name)
         // navigate('/update')
-        document.getElementById('my_modal_3').showModal()
-
     }
+
+
+
 
     const handleLike = () => {
         if (!liked) {
@@ -72,141 +90,148 @@ const MyRecipe = ({ recipe, storeRecipe, setRecipe }) => {
         }
     };
     return (
-        <div>
+        <div className=''>
             <div>
-                <div className="card bg-base-300 w-96 shadow-sm p-3">
+                {userEmail === user.email ?
+                    <div className="card border border-gray-300  w-96 shadow-sm p-3">
 
-                    <img
-                        src={photo}
-                        alt="food"
-                        className="rounded-xl h-60 " />
+                        <img
+                            src={photo}
+                            alt="food"
+                            className="rounded-xl h-60 " />
 
-                    <div className=" mt-4">
-                        <h2 className="text-2xl font-bold">{name}</h2>
-                        <div className='flex items-center justify-between'>
-                            <p>{cuisine}</p>
-                            <p>Like: {like}</p>
-                        </div>
-                        <div className='flex items-center justify-between'>
-                            <p>{Ingredients}</p>
-                            <p>{Instructions}</p>
-                        </div>
-                        <div className='flex items-center justify-between'>
-                            <p>Category: {category}</p>
-                            <p>{time} min</p>
-                        </div>
-                        <div className=" mt-2 flex justify-between">
+                        <div className=" mt-4">
+                            <h2 className="text-2xl font-bold">{name}</h2>
+                            <div className='flex items-center justify-between'>
+                                <p>{cuisine}</p>
+                                <p>Like: {like}</p>
+                            </div>
+                            <div className='flex items-center justify-between'>
+                                <p>{Ingredients}</p>
+                                <p>{Instructions}</p>
+                            </div>
+                            <div className='flex items-center justify-between'>
+                                <p>Category: {category}</p>
+                                <p>{time} min</p>
+                            </div>
+                            <div className=" mt-2 flex justify-between">
 
-                            {/* You can open the modal using document.getElementById('ID').showModal() method */}
-                            <button className="btn bg-green-600 font-bold text-white" onClick={() => updateProfile(_id)}>Update</button>
-                            <dialog id="my_modal_3" className="modal">
-                                <div className="modal-box">
-                                    <form method="dialog">
-                                        {/* if there is a button in form, it will close the modal */}
-                                        <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
-                                    </form>
-                                    <form onSubmit={handleUpdate} className='w-3/4 mx-auto bg-yellow-100 border-base-300 rounded-box  border p-4'>
-                                        <fieldset className="fieldset ">
-                                            <label className="label text-sm text-black font-semibold">Recipe Name</label>
-                                            <input type="text" className="input w-full" required name='name' defaultValue={name} placeholder="Enter recipe name" />
+                                {/* You can open the modal using document.getElementById('ID').showModal() method */}
+                                <button className="btn bg-green-600 font-bold text-white" onClick={() => { document.getElementById('my_modal_3').showModal(), updateProfile(recipe) }}>Update</button>
+                                <dialog id="my_modal_3" className="modal">
+                                    <div className="modal-box">
 
-                                        </fieldset>
+                                        <form onSubmit={handleUpdate} className='w-3/4 mx-auto bg-yellow-100 border-base-300 rounded-box  border p-4'>
+                                            <fieldset className="fieldset ">
+                                                <label className="label text-sm text-black font-semibold">Recipe Name</label>
+                                                <input type="text" className="input w-full" required name='name' onChange={(e) => setRecipeName(e.target.value)} defaultValue={recipeName} placeholder="Enter recipe name" />
 
-                                        <fieldset className="fieldset ">
-                                            <label className="label text-sm text-black font-semibold">Recipe Image</label>
-                                            <input type="text" className="input w-full" required name='photo' placeholder="https://example.png/jpg" />
+                                            </fieldset>
 
-                                        </fieldset>
+                                            <fieldset className="fieldset ">
+                                                <label className="label text-sm text-black font-semibold">Recipe Image</label>
+                                                <input type="text" className="input w-full" required name='photo' placeholder="https://example.png/jpg" />
 
-                                        <fieldset className="fieldset ">
-                                            <label className="label text-sm text-black font-semibold">Ingredients</label>
+                                            </fieldset>
 
-                                            <textarea rows={6} required className='bg-white border border-base-300 p-3' name="Ingredients" id="" placeholder='- 1 cup flour
+                                            <fieldset className="fieldset ">
+                                                <label className="label text-sm text-black font-semibold">Ingredients</label>
+
+                                                <textarea rows={6} required className='bg-white border border-base-300 p-3' name="Ingredients" id="" placeholder='- 1 cup flour
 - 2 eggs
 - 1 tsp salt'></textarea>
 
-                                        </fieldset>
+                                            </fieldset>
 
-                                        <fieldset className="fieldset ">
-                                            <label className="label text-sm text-black font-semibold">Instructions</label>
+                                            <fieldset className="fieldset ">
+                                                <label className="label text-sm text-black font-semibold">Instructions</label>
 
-                                            <textarea name="Instructions" rows={3} required className='bg-white border border-base-300 p-2' id=""></textarea>
-                                        </fieldset>
+                                                <textarea name="Instructions" rows={3} required className='bg-white border border-base-300 p-2' id=""></textarea>
+                                            </fieldset>
 
-                                        <div className='md:flex gap-4 items-center md:justify-between'>
-                                            <div>
-                                                <fieldset className="fieldset">
-                                                    <legend className="fieldset-legend text-sm text-black font-semibold">Cuisine Type</legend>
-                                                    <select defaultValue="Pick a browser" name='cuisine' className="select w-full">
-                                                        <option disabled={true}>Select Cuisine</option>
-                                                        <option>Italian</option>
-                                                        <option>Mexican</option>
-                                                        <option>Indian</option>
-                                                        <option>Chinese</option>
-                                                        <option>Others</option>
-                                                    </select>
+                                            <div className='md:flex gap-4 items-center md:justify-between'>
+                                                <div>
+                                                    <fieldset className="fieldset">
+                                                        <legend className="fieldset-legend text-sm text-black font-semibold">Cuisine Type</legend>
+                                                        <select defaultValue="Pick a browser" name='cuisine' className="select w-full">
+                                                            <option disabled={true}>Select Cuisine</option>
+                                                            <option>Italian</option>
+                                                            <option>Mexican</option>
+                                                            <option>Indian</option>
+                                                            <option>Chinese</option>
+                                                            <option>Others</option>
+                                                        </select>
 
-                                                </fieldset>
+                                                    </fieldset>
+                                                </div>
+                                                <div>
+                                                    <fieldset className="fieldset ">
+                                                        <label className="label text-sm text-black font-semibold">Preparation Time <span className='text-xs text-gray-500'>(in minutes)</span></label>
+                                                        <input type="number" name='time' required className="input w-20 " placeholder="0" />
+
+                                                    </fieldset>
+                                                </div>
                                             </div>
-                                            <div>
-                                                <fieldset className="fieldset ">
-                                                    <label className="label text-sm text-black font-semibold">Preparation Time <span className='text-xs text-gray-500'>(in minutes)</span></label>
-                                                    <input type="number" name='time' required className="input w-20 " placeholder="0" />
 
-                                                </fieldset>
+                                            <fieldset className="fieldset ">
+                                                <label className="label text-sm text-black font-semibold">Categories</label>
+                                                <div className="grid grid-cols-2  gap-3 text-gray-700">
+                                                    <label className="flex items-center space-x-2">
+                                                        <input type="checkbox" name='category[]' value="Breakfast" className="accent-green-600" />
+                                                        <span>Breakfast</span>
+                                                    </label>
+                                                    <label className="flex items-center space-x-2">
+                                                        <input type="checkbox" name='category[]' value="Lunch" className="accent-green-600" />
+                                                        <span>Lunch</span>
+                                                    </label>
+                                                    <label className="flex items-center space-x-2">
+                                                        <input type="checkbox" name='category[]' value="Dinner" className="accent-green-600" />
+                                                        <span>Dinner</span>
+                                                    </label>
+                                                    <label className="flex items-center space-x-2">
+                                                        <input type="checkbox" name='category[]' value="Dessert" className="accent-green-600" />
+                                                        <span>Dessert</span>
+                                                    </label>
+                                                    <label className="flex items-center space-x-2">
+                                                        <input type="checkbox" name='category[]' value="Vegan" className="accent-green-600" />
+                                                        <span>Vegan</span>
+                                                    </label>
+                                                    <label className="flex items-center space-x-2">
+                                                        <input type="checkbox" name='category[]' value="Snack" className="accent-green-600" />
+                                                        <span>Snack</span>
+                                                    </label>
+                                                </div>
+                                            </fieldset>
+
+                                            <div className='mt-3'>
+                                                <div className='flex items-center gap-1'>
+                                                    <p onClick={handleLike} className={`font-bold cursor-pointer  ${liked ? ' cursor-not-allowed' : ''}`}>{likes > 0 ? <FaHeart color='red' /> : <FaRegHeart />} </p>
+                                                    <p className='font-bold' value='0'>{likes} Like</p>
+                                                    <input type="text" name='like' />
+                                                </div>
+                                                <div className='mt-4'>
+                                                    <button className='btn bg-green-400 text-white'>Update Recipe</button>
+                                                </div>
                                             </div>
-                                        </div>
 
-                                        <fieldset className="fieldset ">
-                                            <label className="label text-sm text-black font-semibold">Categories</label>
-                                            <div className="grid grid-cols-2  gap-3 text-gray-700">
-                                                <label className="flex items-center space-x-2">
-                                                    <input type="checkbox" name='category[]' value="Breakfast" className="accent-green-600" />
-                                                    <span>Breakfast</span>
-                                                </label>
-                                                <label className="flex items-center space-x-2">
-                                                    <input type="checkbox" name='category[]' value="Lunch" className="accent-green-600" />
-                                                    <span>Lunch</span>
-                                                </label>
-                                                <label className="flex items-center space-x-2">
-                                                    <input type="checkbox" name='category[]' value="Dinner" className="accent-green-600" />
-                                                    <span>Dinner</span>
-                                                </label>
-                                                <label className="flex items-center space-x-2">
-                                                    <input type="checkbox" name='category[]' value="Dessert" className="accent-green-600" />
-                                                    <span>Dessert</span>
-                                                </label>
-                                                <label className="flex items-center space-x-2">
-                                                    <input type="checkbox" name='category[]' value="Vegan" className="accent-green-600" />
-                                                    <span>Vegan</span>
-                                                </label>
-                                                <label className="flex items-center space-x-2">
-                                                    <input type="checkbox" name='category[]' value="Snack" className="accent-green-600" />
-                                                    <span>Snack</span>
-                                                </label>
-                                            </div>
-                                        </fieldset>
-
-                                        <div className='mt-3'>
-                                            <div className='flex items-center gap-1'>
-                                                <p onClick={handleLike} className={`font-bold cursor-pointer  ${liked ? ' cursor-not-allowed' : ''}`}>{likes > 0 ? <FaHeart color='red' /> : <FaRegHeart />} </p>
-                                                <p className='font-bold' value='0'>{likes} Like</p>
-                                                <input type="text" name='like' />
-                                            </div>
-                                            <div className='mt-4'>
-                                                <button className='btn bg-green-400 text-white'>Update Recipe</button>
-                                            </div>
-                                        </div>
-
-                                    </form>
-                                </div>
-                            </dialog>
+                                        </form>
+                                    </div>
+                                </dialog>
 
 
-                            <button onClick={() => handleDelete(_id)} className="btn  bg-red-600 text-white font-bold">Delete</button>
+                                <button onClick={() => handleDelete(_id)} className="btn  bg-red-600 text-white font-bold">Delete</button>
+                            </div>
                         </div>
                     </div>
-                </div>
+                    :
+                    <div className='flex justify-center'>
+                        < div className='text-center space-y-4 bg-amber-50 rounded-e-lg border border-gray-300 p-10 my-10 '>
+                            <h2 className='text-4xl font-bold text-yellow-300'>No Recipe added here.</h2>
+                            <h2 className='text-xl font-bold text-yellow-300'>If you want to add Recipe.</h2>
+                            <Link to={'/add-recipe'}><button className='btn bg-yellow-300 text-white text-lg'>Add Recipe</button></Link>
+                        </div>
+                    </div>
+                }
             </div>
         </div>
     );

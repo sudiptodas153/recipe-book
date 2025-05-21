@@ -1,9 +1,12 @@
 
-import { useState } from 'react';
+import { use, useState } from 'react';
 import { FaHeart, FaRegHeart } from 'react-icons/fa';
 import Swal from 'sweetalert2';
+import { AuthContext } from '../../Context/AuthContext';
 
 const AddRecipe = () => {
+    const {user} = use(AuthContext);
+    console.log(user.email)
     const [likes, setLikes] = useState(0);
     const [liked, setLiked] = useState(false);
 
@@ -15,13 +18,13 @@ const AddRecipe = () => {
         const categories = formData.getAll('category[]')
         console.log(categories)
         const recipeData = Object.fromEntries(formData.entries());
-
+        recipeData.userEmail = user.email
         recipeData.category = categories;
         recipeData.like = likes
         console.log(recipeData)
 
 
-        fetch('http://localhost:3000/recipes', {
+        fetch('https://recipe-database-zeta.vercel.app/recipes', {
             method: "POST",
             headers: {
                 "content-type": 'application/json'

@@ -7,7 +7,9 @@ import AddRecipe from "../Components/AddRecipe/AddRecipe";
 import ErrorPage from "../Components/ErrorPage/ErrorPage";
 import MyRecipes from "../Components/MyRecipes/MyRecipes";
 import RecipeDetails from "../Components/RecipeDetails/RecipeDetails";
-import Updated from "../Components/Updated/Updated";
+import PrivateRoute from "../PrivateRoute/PrivateRoute";
+import MyRecipe from "../Components/MyRecipe/MyRecipe";
+import AllRecipe from "../Components/AllRecipe/AllRecipe";
 
 
 
@@ -19,12 +21,12 @@ export const router = createBrowserRouter([
         children: [
             {
                 index: true,
-                loader: ()=>fetch('http://localhost:3000/top-recipes'),
+                loader: () => fetch('https://recipe-database-zeta.vercel.app/top-recipes'),
                 Component: Home
             },
             {
                 path: 'login',
-                Component:Login
+                Component: Login
             },
             {
                 path: 'register',
@@ -32,23 +34,23 @@ export const router = createBrowserRouter([
             },
             {
                 path: 'add-recipe',
-                Component: AddRecipe
+                element: <PrivateRoute><AddRecipe></AddRecipe></PrivateRoute>
+            },
+            {
+                path: 'all-recipe',
+                Component: AllRecipe
             },
             {
                 path: 'my-recipes',
-                loader: ()=>fetch('http://localhost:3000/recipes'),
-                Component: MyRecipes
+                loader: () => fetch('https://recipe-database-zeta.vercel.app/recipes'),
+                element: <PrivateRoute><MyRecipes></MyRecipes></PrivateRoute>
             },
             {
                 path: 'recipe/:id',
-                loader:({params})=>fetch(`http://localhost:3000/recipes/${params.id}`),
-                Component: RecipeDetails
+                loader: ({ params }) => fetch(`https://recipe-database-zeta.vercel.app/recipes/${params.id}`),
+                element: <PrivateRoute><RecipeDetails></RecipeDetails></PrivateRoute>
             },
-            {
-                path: 'update/:id',
-                loader:({params})=>fetch(`http://localhost:3000/recipes/${params.id}`),
-                Component: Updated
-            }
+           
         ]
     },
 ]);

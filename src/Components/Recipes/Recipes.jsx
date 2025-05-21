@@ -8,7 +8,7 @@ const Recipes = ({ recipe}) => {
 
     return (
         <div>
-            <div className="card bg-base-300 w-96 shadow-sm p-3">
+            <div className="card border border-gray-500 bg-yellow-50 w-96 shadow-sm p-3">
 
                 <img
                     src={photo}

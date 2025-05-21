@@ -1,11 +1,11 @@
 import React from 'react';
 
-const Updated = () => {
+const AllRecipe = () => {
     return (
         <div>
-            
+
         </div>
     );
 };
 
-export default Updated;
+export default AllRecipe;

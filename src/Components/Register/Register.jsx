@@ -1,29 +1,91 @@
-import React, { use } from 'react';
+import React, { use, useState } from 'react';
 import { Link, useNavigate } from 'react-router';
 import { AuthContext } from '../../Context/AuthContext';
 import Swal from 'sweetalert2';
 
 const Register = () => {
 
+    const [passCheck, setPassCheck] = useState(false);
+    const [passCheck2, setPassCheck2] = useState(false);
+    const [passCheck3, setPassCheck3] = useState(false);
+
     const userInfo = use(AuthContext);
     const navigate = useNavigate();
     const { createUser, profileUpdate, user, setUser, googleSignIn } = userInfo;
 
-    console.log(user)
+
     const handleRegister = e => {
         e.preventDefault();
+        const form = e.target;
+        const formData = new FormData(form);
+        const { email, password, ...rest } = Object.fromEntries(formData.entries())
+
+
+
 
         const name = e.target.name.value;
-        const email = e.target.email.value;
         const photo = e.target.photo.value;
-        const pass = e.target.password.value;
 
 
-        createUser(email, pass)
-            .then(() => {
+
+
+        const pass1 = /^(?=.*[A-Z]).*$/
+        const pass2 = /^(?=.*[a-z]).*$/
+        const pass3 = /^.{6,}$/
+
+        setPassCheck(false);
+        setPassCheck2(false);
+        setPassCheck3(false);
+
+
+        if (pass1.test(password) === false) {
+            setPassCheck(true);
+            return;
+        }
+        if (pass2.test(password) === false) {
+            setPassCheck2(true);
+            return;
+        }
+        if (pass3.test(password) === false) {
+            setPassCheck3(true);
+            return;
+        }
+
+
+
+
+
+
+        createUser(email, password)
+            .then(result => {
 
                 setUser({ ...user, displayName: name, photoURL: photo })
                 profileUpdate({ displayName: name, photoURL: photo })
+
+
+                const userProfile = {
+                    email,
+                    ...rest,
+                    creationTime: result.user?.metadata?.creationTime,
+                    lastSignInTime: result.user?.metadata?.lastSignInTime
+                }
+                fetch('https://recipe-database-zeta.vercel.app/users', {
+                    method: "POST",
+                    headers: {
+                        "content-type": "application/json"
+                    },
+                    body: JSON.stringify(userProfile)
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data.insertedId) {
+                            Swal.fire({
+                                title: "Registration Successful",
+                                icon: "success",
+                                draggable: true
+                            });
+                        }
+                    })
                 navigate('/')
             })
             .catch(() => {
@@ -44,12 +106,38 @@ const Register = () => {
         googleSignIn()
             .then((result) => {
                 console.log(result)
-                Swal.fire({
-                    title: "Login Successful",
-                    icon: "success",
-                    draggable: true
-                });
-                navigate('/')
+
+                const userProfile = {
+                    email: user.email,
+                    displayName: user.displayName,
+                    photoURL: user.photoURL,
+                    creationTime: user.metadata?.creationTime,
+                    lastSignInTime: user.metadata?.lastSignInTime
+                };
+
+
+                fetch('https://recipe-database-zeta.vercel.app/users', {
+                    method: "POST",
+                    headers: {
+                        "content-type": "application/json"
+                    },
+                    body: JSON.stringify(userProfile)
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data.insertedId) {
+                            Swal.fire({
+                                title: "Login Successful",
+                                icon: "success",
+                                draggable: true
+                            });
+                            navigate('/')
+                        }
+                    })
+
+
+
+
 
             })
             .catch(() => {
@@ -82,7 +170,18 @@ const Register = () => {
 
                         <label className="label font-bold text-black">Password</label>
                         <input type="password" required name='password' className="input" placeholder="Enter your password" />
-
+                        {
+                            passCheck ? <p className='text-[10px] text-red-600 font-bold'>Must have an Uppercase letter in the password.
+                            </p> : ''
+                        }
+                        {
+                            passCheck2 && <p className='text-[10px] text-red-600 font-bold'>Must have a Lowercase letter in the password.
+                            </p>
+                        }
+                        {
+                            passCheck3 && <p className='text-[10px] text-red-600 font-bold'>Length must be at least 6 characters.
+                            </p>
+                        }
 
 
 

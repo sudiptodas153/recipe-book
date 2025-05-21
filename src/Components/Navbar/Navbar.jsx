@@ -1,5 +1,5 @@
 import React, { use } from 'react';
-import { Link, NavLink} from 'react-router';
+import { Link, NavLink } from 'react-router';
 import { AuthContext } from '../../Context/AuthContext';
 import { signOut } from 'firebase/auth';
 import { auth } from '../../Firebase/Firebase';
@@ -7,7 +7,7 @@ import './nav.css'
 import Swal from 'sweetalert2';
 
 const Navbar = () => {
-   
+
     const userInfo = use(AuthContext);
     const { user } = userInfo;
 
@@ -36,9 +36,8 @@ const Navbar = () => {
     const links = <>
         <NavLink to={'/'}><li>Home</li></NavLink>
         <NavLink to={'/all-recipe'}><li>All Recipes</li></NavLink>
-       {
-        user &&  <NavLink to={'/add-recipe'}><li>Add Recipe</li></NavLink>
-       }
+        <NavLink to={'/add-recipe'}><li>Add Recipe</li></NavLink>
+
         <NavLink to={'/my-recipes'}><li>My Recipes</li></NavLink>
     </>
 
@@ -71,7 +70,7 @@ const Navbar = () => {
                                 {
                                     user?.photoURL && <img className='w-10 h-10 rounded-full' src={user?.photoURL} alt="" />
                                 }
-                                
+
                                 <button onClick={handleLogOut} className="btn bg-yellow-400 text-white font-bold">Logout</button>
                             </div>
 

@@ -72,7 +72,7 @@ const Login = () => {
 
                         <input className='btn w-full bg-green-500 border-none text-white' type="submit" value="Login" />
 
-                        <p className='text-xs flex gap-1'>Don't have an account? <Link to={'/register'}><p className='text-blue-600'>Register</p></Link></p>
+                        <div className='text-xs flex gap-1'><span>Don't have an account?</span> <Link to={'/register'}><p className='text-blue-600'>Register</p></Link></div>
 
                     </fieldset>
                 </form>
