@@ -1,5 +1,8 @@
 import React from 'react';
-
+import image from '../../assets/event-1.jpg'
+import image2 from '../../assets/events-2.jpeg'
+import image3 from '../../assets/events-3.jpeg'
+import image4 from '../../assets/events-4.jpg'
 
 
 
@@ -17,7 +20,7 @@ const Banner = () => {
 
     return (
 
-        <div className='container mx-auto px-3 my-10'>
+        <div className=' my-10'>
 
 
 
@@ -37,12 +40,10 @@ const Banner = () => {
                     modules={[Autoplay, Pagination]}
                     className="mySwiper w-full  z-10"
                 >
-                    <SwiperSlide></SwiperSlide>
-                    <SwiperSlide></SwiperSlide>
-                    <SwiperSlide></SwiperSlide>
-                    <SwiperSlide></SwiperSlide>
-                    <SwiperSlide></SwiperSlide>
-                    <SwiperSlide></SwiperSlide>
+                    <SwiperSlide><img className='w-full md:h-[500px]' src={image} alt="" /></SwiperSlide>
+                    <SwiperSlide><img className='w-full md:h-[500px]' src={image2} alt="" /></SwiperSlide>
+                    <SwiperSlide><img className='w-full md:h-[500px]' src={image3} alt="" /></SwiperSlide>
+                    <SwiperSlide><img className='w-full md:h-[500px]' src={image4} alt="" /></SwiperSlide>
                  
                    
                 </Swiper>

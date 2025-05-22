@@ -6,7 +6,7 @@ import { AuthContext } from '../../Context/AuthContext';
 
 const AddRecipe = () => {
     const {user} = use(AuthContext);
-    console.log(user.email)
+    // console.log(user.email)
     const [likes, setLikes] = useState(0);
     const [liked, setLiked] = useState(false);
 

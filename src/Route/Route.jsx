@@ -23,40 +23,41 @@ export const router = createBrowserRouter([
             {
                 index: true,
                 loader: () => fetch('https://recipe-database-zeta.vercel.app/top-recipes'),
-                hydrateFallbackElement:<Loader></Loader>,
+                hydrateFallbackElement: <Loader></Loader>,
                 Component: Home
             },
             {
                 path: 'login',
-                 hydrateFallbackElement:<Loader></Loader>,
+                hydrateFallbackElement: <Loader></Loader>,
                 Component: Login
             },
             {
                 path: 'register',
-                 hydrateFallbackElement:<Loader></Loader>,
+                hydrateFallbackElement: <Loader></Loader>,
                 Component: Register
             },
             {
                 path: 'add-recipe',
-                 hydrateFallbackElement:<Loader></Loader>,
+                hydrateFallbackElement: <Loader></Loader>,
                 element: <PrivateRoute><AddRecipe></AddRecipe></PrivateRoute>
             },
             {
                 path: 'all-recipe',
                 loader: () => fetch('https://recipe-database-zeta.vercel.app/recipes'),
-                 hydrateFallbackElement:<Loader></Loader>,
+                hydrateFallbackElement: <Loader></Loader>,
                 Component: AllRecipe
             },
             {
                 path: 'my-recipes',
-                loader: () => fetch('https://recipe-database-zeta.vercel.app/recipes'),
-                 hydrateFallbackElement:<Loader></Loader>,
+                loader: () => fetch(`https://recipe-database-zeta.vercel.app/recipes`),
+                hydrateFallbackElement: <Loader></Loader>,
                 element: <PrivateRoute><MyRecipes></MyRecipes></PrivateRoute>
             },
+            
             {
                 path: 'recipe/:id',
-                loader: ({ params }) => fetch(`https://recipe-database-zeta.vercel.app/recipes/${params.id}`),
-                 hydrateFallbackElement:<Loader></Loader>,
+                loader: ({ params}) => fetch(`https://recipe-database-zeta.vercel.app/recipes/${params.id}`),
+                hydrateFallbackElement: <Loader></Loader>,
                 element: <PrivateRoute><RecipeDetails></RecipeDetails></PrivateRoute>
             },
 
