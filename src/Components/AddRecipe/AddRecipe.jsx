@@ -5,7 +5,8 @@ import Swal from 'sweetalert2';
 import { AuthContext } from '../../Context/AuthContext';
 
 const AddRecipe = () => {
-    const {user} = use(AuthContext);
+    const {user,themes} = use(AuthContext);
+
     // console.log(user.email)
     const [likes, setLikes] = useState(0);
     const [liked, setLiked] = useState(false);
@@ -59,24 +60,25 @@ const AddRecipe = () => {
 
     return (
         <div className='container mx-auto my-10'>
+            <title>Add Recipe</title>
             <h2 className='text-center text-3xl font-bold'>Add Recipe</h2>
             <div className='mt-10'>
 
-                <form onSubmit={handleAddRecipe} className='w-3/4 mx-auto bg-yellow-100 border-base-300 rounded-box  border p-4'>
+                <form onSubmit={handleAddRecipe} className={`w-3/4 text-white mx-auto ${!themes ? 'bg-yellow-100 border border-base-300' : 'border border-white'}  rounded-box   p-4`}>
                     <fieldset className="fieldset ">
-                        <label className="label text-sm text-black font-semibold">Recipe Name</label>
-                        <input type="text" className="input w-full" required name='name' placeholder="Enter recipe name" />
+                        <label className={`label text-sm ${!themes && 'text-black'} font-semibold`}>Recipe Name</label>
+                        <input type="text" className={`input w-full `} required name='name' placeholder="Enter recipe name" />
 
                     </fieldset>
 
                     <fieldset className="fieldset ">
-                        <label className="label text-sm text-black font-semibold">Recipe Image</label>
+                        <label className={`label text-sm ${!themes && 'text-black'}  font-semibold`}>Recipe Image</label>
                         <input type="text" className="input w-full" required name='photo' placeholder="https://example.png/jpg" />
 
                     </fieldset>
 
                     <fieldset className="fieldset ">
-                        <label className="label text-sm text-black font-semibold">Ingredients</label>
+                        <label className={`label text-sm ${!themes && 'text-black'}  font-semibold`}>Ingredients</label>
 
                         <textarea rows={6} required className='bg-white border border-base-300 p-3' name="Ingredients" id="" placeholder='- 1 cup flour
 - 2 eggs
@@ -85,7 +87,7 @@ const AddRecipe = () => {
                     </fieldset>
 
                     <fieldset className="fieldset ">
-                        <label className="label text-sm text-black font-semibold">Instructions</label>
+                        <label className={`label text-sm ${!themes && 'text-black'}  font-semibold`}>Instructions</label>
 
                         <textarea name="Instructions" rows={3} required className='bg-white border border-base-300 p-2' id=""></textarea>
                     </fieldset>
@@ -93,7 +95,7 @@ const AddRecipe = () => {
                     <div className='md:flex items-center md:justify-between'>
                         <div>
                             <fieldset className="fieldset">
-                                <legend className="fieldset-legend text-sm text-black font-semibold">Cuisine Type</legend>
+                                <legend className={`fieldset-legend text-sm ${!themes && 'text-black'} font-semibold`}>Cuisine Type</legend>
                                 <select defaultValue="Pick a browser" name='cuisine' className="select w-full">
                                     <option disabled={true}>Select Cuisine</option>
                                     <option>Italian</option>
@@ -107,7 +109,7 @@ const AddRecipe = () => {
                         </div>
                         <div>
                             <fieldset className="fieldset ">
-                                <label className="label text-sm text-black font-semibold">Preparation Time <span className='text-xs text-gray-500'>(in minutes)</span></label>
+                                <label className={`label text-sm ${!themes && 'text-black'}  font-semibold`}>Preparation Time <span className='text-xs text-gray-500'>(in minutes)</span></label>
                                 <input type="number" name='time' required className="input w-20 md:w-full" placeholder="0" />
 
                             </fieldset>
@@ -115,7 +117,7 @@ const AddRecipe = () => {
                     </div>
 
                     <fieldset className="fieldset ">
-                        <label className="label text-sm text-black font-semibold">Categories</label>
+                        <label className={`label text-sm ${!themes && 'text-black'}  font-semibold`}>Categories</label>
                         <div className="grid grid-cols-2 md:flex gap-3 text-gray-700">
                             <label className="flex items-center space-x-2">
                                 <input type="checkbox" name='category[]' value="Breakfast" className="accent-green-600" />
@@ -147,7 +149,7 @@ const AddRecipe = () => {
                     <div className='mt-2 space-y-2 md:flex md:justify-between md:items-center'>
                         <div className='flex items-center gap-1'>
                             <p onClick={handleLike} className={`font-bold cursor-pointer ${liked ? ' cursor-not-allowed' : ''}`}>{likes > 0 ? <FaHeart color='red' /> : <FaRegHeart />} </p>
-                            <p className='font-bold' value='0'>{likes} Like</p>
+                            <p className={`font-bold ${!themes && 'text-black'}`} value='0'>{likes} Like</p>
                             <input type="text" name='like' />
                         </div>
                         <div>

@@ -4,33 +4,33 @@ import { AuthContext } from './AuthContext';
 import { auth } from '../Firebase/Firebase';
 
 
-const AuthContextProvider = ({children}) => {
+const AuthContextProvider = ({ children }) => {
 
-const provider = new GoogleAuthProvider();
-const [loading, setLoading] = useState(true)
-const [user, setUser] = useState(null)
+    const provider = new GoogleAuthProvider();
+    const [loading, setLoading] = useState(true)
+    const [user, setUser] = useState(null)
+    const [themes, setThemes] = useState(false)
 
- 
 
-    const createUser = (email, pass) =>{
+    const createUser = (email, pass) => {
         setLoading(true);
-       return createUserWithEmailAndPassword(auth,email,pass);
+        return createUserWithEmailAndPassword(auth, email, pass);
     }
 
-    const profileUpdate = userDetails =>{
-       
-       return updateProfile(auth.currentUser, userDetails)
+    const profileUpdate = userDetails => {
+
+        return updateProfile(auth.currentUser, userDetails)
     }
 
 
-    const signUser = (email, pass) =>{
+    const signUser = (email, pass) => {
         setLoading(true);
-       return signInWithEmailAndPassword(auth , email, pass);
+        return signInWithEmailAndPassword(auth, email, pass);
     }
 
-    const googleSignIn = () =>{
+    const googleSignIn = () => {
         setLoading(true);
-      return signInWithPopup(auth, provider);
+        return signInWithPopup(auth, provider);
 
     }
 
@@ -39,16 +39,15 @@ const [user, setUser] = useState(null)
 
 
 
-
-    useEffect(()=>{
-    const unSubscribe = onAuthStateChanged(auth, currentUser=>{
-        setUser(currentUser);
-        setLoading(false);
-    }) 
-    return ()=>{
-        unSubscribe();
-    }
-    },[])
+    useEffect(() => {
+        const unSubscribe = onAuthStateChanged(auth, currentUser => {
+            setUser(currentUser);
+            setLoading(false);
+        })
+        return () => {
+            unSubscribe();
+        }
+    }, [])
 
 
     const userInfo = {
@@ -58,7 +57,9 @@ const [user, setUser] = useState(null)
         setUser,
         signUser,
         googleSignIn,
-        loading
+        loading,
+        themes,
+        setThemes,
     }
 
     return (

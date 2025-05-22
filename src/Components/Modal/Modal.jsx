@@ -1,19 +1,39 @@
 import React from 'react';
 import { FaHeart, FaRegHeart } from 'react-icons/fa';
+import Swal from 'sweetalert2';
 
-const Modal = ({ modalData, handleLike, likes, liked }) => {
-
+const Modal = ({ modalData,verifyId }) => {
+// console.log(verifyId)
     const handleUpdate = e => {
         e.preventDefault();
         const form = e.target;
         const formData = new FormData(form);
-        const like = likes;
+       
         const categories = formData.getAll('category[]')
-
         const recipeData = Object.fromEntries(formData.entries());
-
         recipeData.category = categories;
-        recipeData.like = likes
+       
+        // console.log(recipeData)
+
+
+        fetch(`https://recipe-database-zeta.vercel.app/recipes/${verifyId}`,{
+            method: "PUT",
+            headers: {
+                "content-type": "application/json"
+            },
+            body: JSON.stringify(recipeData)
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.modifiedCount) {
+                    document.getElementById('my_modal_3').close()
+                    Swal.fire({
+                        title: "Recipe update successful",
+                        icon: "success",
+                        draggable: true
+                    });
+                }
+            })
 
     }
 
@@ -84,7 +104,7 @@ const Modal = ({ modalData, handleLike, likes, liked }) => {
                             <label className="label text-sm text-black font-semibold">Categories</label>
                             <div className="grid grid-cols-2  gap-3 text-gray-700">
                                 <label className="flex items-center space-x-2">
-                                    <input type="checkbox" name='category[]' value="Breakfast"  className="accent-green-600" />
+                                    <input type="checkbox" name='category[]' value="Breakfast" className="accent-green-600"/>
                                     <span>Breakfast</span>
                                 </label>
                                 <label className="flex items-center space-x-2">
@@ -111,14 +131,10 @@ const Modal = ({ modalData, handleLike, likes, liked }) => {
                         </fieldset>
 
                         <div className='mt-3'>
-                            <div className='flex items-center gap-1'>
-                                <p onClick={handleLike} className={`font-bold cursor-pointer  ${liked ? ' cursor-not-allowed' : ''}`}>{likes > 0 ? <FaHeart color='red' /> : <FaRegHeart />} </p>
-                                <p className='font-bold' value='0'>{likes} Like</p>
-                                <input type="text" name='like' />
-                            </div>
+                          
                             <div className='mt-4 flex justify-between'>
                                 <button className='btn bg-green-400 text-white'>Update Recipe</button>
-                                <button onClick={()=>document.getElementById('my_modal_3').close()} className='btn bg-yellow-400 text-white'>Close</button>
+                                <button onClick={() => document.getElementById('my_modal_3').close()} className='btn bg-yellow-400 text-white'>Close</button>
                             </div>
                         </div>
 

@@ -6,16 +6,10 @@ import { AuthContext } from '../../Context/AuthContext';
 
 
 
-const MyRecipe = ({ recipe, storeRecipe, setRecipe, handleModal }) => {
+const MyRecipe = ({ recipe, handleModal, deleteHandle, setDeleteHandle }) => {
 
     const { _id, like, name, photo, cuisine, Ingredients, Instructions, time, category } = recipe;
-    // const [identifyEmail, setIdentifyEmail] = useState(null)
-    // console.log(identifyEmail)
-    // const data = useLoaderData();
-    // const { user } = use(AuthContext);
-    // useEffect(() => {
-    //     data.map(i => setIdentifyEmail(i.userEmail))
-    // }, [data])
+   
 
     const handleDelete = (_id) => {
 
@@ -41,8 +35,8 @@ const MyRecipe = ({ recipe, storeRecipe, setRecipe, handleModal }) => {
                                 icon: "success"
                             });
 
-                            const uiUpdate = storeRecipe.filter(recipe => recipe._id !== _id)
-                            setRecipe(uiUpdate);
+                            const uiUpdate = deleteHandle.filter(recipeData => recipeData._id !== _id)
+                            setDeleteHandle(uiUpdate);
                         }
                     })
 
@@ -55,10 +49,7 @@ const MyRecipe = ({ recipe, storeRecipe, setRecipe, handleModal }) => {
 
     return (
         <div className=''>
-
-            {/* {
-                identifyEmail === user?.email
-            } */}
+           
 
             <div>
 
@@ -93,7 +84,7 @@ const MyRecipe = ({ recipe, storeRecipe, setRecipe, handleModal }) => {
                         <div className=" mt-2 flex justify-between">
 
                             {/* You can open the modal using document.getElementById('ID').showModal() method */}
-                            <button className="btn bg-green-600 font-bold text-white" onClick={() => handleModal(recipe)}>Update</button>
+                            <button className="btn bg-green-600 font-bold text-white" onClick={() => handleModal(recipe,_id)}>Update</button>
 
 
 

@@ -1,14 +1,15 @@
-import React from 'react';
+import React, { use } from 'react';
 import { Link } from 'react-router';
+import { AuthContext } from '../../Context/AuthContext';
 
-const Recipes = ({ recipe}) => {
-    // console.log(recipe);
+const Recipes = ({ recipe }) => {
+    const { themes } = use(AuthContext);
 
-    const {_id, name,like, photo, cuisine, } = recipe;
+    const { _id, name, like, photo, cuisine, } = recipe;
 
     return (
         <div>
-            <div className="card border border-gray-500 bg-yellow-50 md:w-96 shadow-sm p-3">
+            <div className={`card border border-gray-500 ${!themes ? 'bg-yellow-50' :''} md:w-96 shadow-sm p-3`}>
 
                 <img
                     src={photo}

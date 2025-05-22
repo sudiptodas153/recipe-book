@@ -154,6 +154,7 @@ const Register = () => {
 
     return (
         <div className='flex justify-center my-20'>
+            <title>Register</title>
             <div className='bg-yellow-200 w-80 p-4 rounded-lg'>
                 <form onSubmit={handleRegister}>
                     <fieldset className="fieldset  p-4">

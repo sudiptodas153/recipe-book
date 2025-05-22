@@ -6,10 +6,10 @@ import { auth } from '../../Firebase/Firebase';
 import './nav.css'
 import Swal from 'sweetalert2';
 
-const Navbar = ({ setThemes, themes }) => {
+const Navbar = () => {
 
     const userInfo = use(AuthContext);
-    const { user } = userInfo;
+    const { user, themes, setThemes } = userInfo;
 
     // console.log(user?.displayName)
     // console.log(user?.photoURL)
@@ -58,7 +58,7 @@ const Navbar = ({ setThemes, themes }) => {
                     <a className=" text-3xl font-bold text-yellow-400">Yummiary</a>
                 </div>
                 <div className="navbar-center hidden lg:flex">
-                    <ul className="menu menu-horizontal gap-8 px-1">
+                    <ul className="menu font-bold menu-horizontal gap-8 px-1">
                         {links}
                     </ul>
                 </div>

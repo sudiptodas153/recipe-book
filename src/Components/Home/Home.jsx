@@ -10,6 +10,7 @@ const Home = () => {
 
     return (
         <div className='w-11/12 mx-auto md:space-y-10'>
+            <title>Home</title>
             <Banner></Banner>
             <TopRecipe data={data}></TopRecipe>
         </div>

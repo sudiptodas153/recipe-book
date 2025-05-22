@@ -6,53 +6,38 @@ import Modal from '../Modal/Modal';
 
 const MyRecipes = () => {
 
-    const [likes, setLikes] = useState(0);
-    const [modalData, setModalData] = useState(null);
-    const [liked, setLiked] = useState(false);
-    const [identifyByEmail, setIdentifyByEmail] = useState([]);
-
     const data = useLoaderData()
     const { user } = use(AuthContext);
+    const [modalData, setModalData] = useState(null);
+    const [identifyByEmail, setIdentifyByEmail] = useState([]);
+    const [verifyId, setVerifyId] = useState(null);
+    const [deleteHandle, setDeleteHandle] = useState(data)
 
-
-
+   
     useEffect(() => {
         //    const filtered =  data.filter(r=>r.userEmail === user.email);
-        const filteredItems = data.filter(item => item.userEmail === user?.email);
-        console.log(filteredItems)
+        const filteredItems = deleteHandle.filter(item => item.userEmail === user?.email);
+        // console.log(filteredItems)
         setIdentifyByEmail(filteredItems);
-    }, [data, user?.email])
+    }, [deleteHandle, user?.email])
     // console.log(identifyByEmail)
 
-
-
-
-
-
-    const handleLike = () => {
-        if (!liked) {
-            setLikes(likes + 1);
-            setLiked(true);
-            likes.reset()
-        }
-    };
-
-
-    const handleModal = (data) => {
+    const handleModal = (data, _id) => {
         setModalData(data)
+        setVerifyId(_id)
         setTimeout(() => {
             document.getElementById('my_modal_3').showModal();
         }, 500);
-
 
     }
 
 
     return (
         <div className=' w-11/12 mx-auto my-10'>
+            <title>My Recipe</title>
             <div className=''>
                 {
-                    identifyByEmail.length>0 &&
+                    identifyByEmail.length > 0 &&
                     <h2 className='text-3xl md:text-5xl font-bold text-center mb-5 md:mb-10'>My Recipe</h2>
                 }
 
@@ -61,7 +46,7 @@ const MyRecipes = () => {
                     {identifyByEmail.length > 0 ?
                         <div className='grid grid-cols-1 md:grid-cols-2 gap-4 '>
                             {
-                                identifyByEmail.map(recipe => <MyRecipe handleModal={handleModal} key={recipe._id} recipe={recipe}></MyRecipe>)
+                                identifyByEmail.map(recipe => <MyRecipe handleModal={handleModal} deleteHandle={deleteHandle} setDeleteHandle={setDeleteHandle} key={recipe._id} recipe={recipe}></MyRecipe>)
                             }
 
                         </div>
@@ -75,7 +60,7 @@ const MyRecipes = () => {
                         </div>
                     }
 
-                    <Modal modalData={modalData} liked={liked} likes={likes} handleLike={handleLike}></Modal>
+                    <Modal modalData={modalData} verifyId={verifyId} ></Modal>
                 </div>
             </div>
         </div >

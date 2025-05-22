@@ -1,11 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { use, useEffect, useState } from 'react';
 import { Link, useLoaderData } from 'react-router';
+import { AuthContext } from '../../Context/AuthContext';
 
 const AllRecipe = () => {
     const data = useLoaderData();
     const [filteredData, setFilteredData] = useState(data);
     const [sort, setSort] = useState('All');
-
+    const { themes } = use(AuthContext);
     useEffect(() => {
         if (sort === 'All') {
             setFilteredData(data);
@@ -24,21 +25,26 @@ const AllRecipe = () => {
 
     return (
         <div className='w-11/12 mx-auto my-10'>
-            <h2 className='text-center my-8 text-4xl font-bold'>All Recipe</h2>
-            <div className='mb-8'>
+
+            <div className='md:flex md:gap-[340px] items-center mb-8'>
+
                 <select value={sort}
                     onChange={handleSelect} className="select w-40 select-info">
 
                     <option value="All">All</option>
                     <option value="Italian">Italian</option>
                     <option value="Mexican">Mexican</option>
+                    <option value="Indian">Indian</option>
+                    <option value="Chinese">Chinese</option>
+                    <option value="Others">Others</option>
                 </select>
+                <h2 className='text-center my-8 text-4xl font-bold'>All Recipe</h2>
             </div>
             <div className='grid grid-cols-1 md:grid-cols-4 gap-4'>
                 {
                     filteredData.map(resp =>
                         <div key={resp._id} className=''>
-                            <div className="card border border-gray-500 md:h-[400px] bg-yellow-50 shadow-sm p-3">
+                            <div className={`card border border-gray-500 md:h-[400px] ${!themes && 'bg-yellow-50'} shadow-sm p-3`}>
 
                                 <img
                                     src={resp.photo}

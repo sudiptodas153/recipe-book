@@ -1,12 +1,16 @@
-import React from 'react';
+import React, { use } from 'react';
 import { FaFacebook, FaGithub, FaLinkedin, FaTwitter } from 'react-icons/fa';
+import { AuthContext } from '../../Context/AuthContext';
 // import icon from '../../assets/ChatGPT Image May 20, 2025, 11_13_44 PM.png'
 
 const Footer = () => {
+
+const {themes} = use(AuthContext)
+
   return (
     <div className='mt-10'>
 
-      <footer className="footer sm:footer-horizontal md:flex justify-center md:gap-28 bg-yellow-200 text-base-content p-10">
+      <footer className={`footer ${themes && 'text-black'} sm:footer-horizontal md:flex justify-center md:gap-28 bg-yellow-200 text-base-content p-10`}>
         <aside>
 
           <h2 className='text-4xl font-bold'>Yummiary</h2>

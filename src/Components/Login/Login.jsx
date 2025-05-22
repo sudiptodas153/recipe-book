@@ -57,6 +57,7 @@ const Login = () => {
 
     return (
         <div className='flex justify-center my-20'>
+            <title>Login</title>
 
             <div className='bg-yellow-200 border-base-300 w-80 p-2 rounded-lg'>
                 <form onSubmit={loginUser}>
