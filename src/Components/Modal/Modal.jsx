@@ -1,22 +1,23 @@
 import React from 'react';
-import { FaHeart, FaRegHeart } from 'react-icons/fa';
+
+import { RxCross1 } from 'react-icons/rx';
 import Swal from 'sweetalert2';
 
-const Modal = ({ modalData,verifyId }) => {
-// console.log(verifyId)
+const Modal = ({ modalData, verifyId }) => {
+    // console.log(verifyId)
     const handleUpdate = e => {
         e.preventDefault();
         const form = e.target;
         const formData = new FormData(form);
-       
+
         const categories = formData.getAll('category[]')
         const recipeData = Object.fromEntries(formData.entries());
         recipeData.category = categories;
-       
+
         // console.log(recipeData)
 
 
-        fetch(`https://recipe-database-zeta.vercel.app/recipes/${verifyId}`,{
+        fetch(`https://recipe-database-zeta.vercel.app/recipes/${verifyId}`, {
             method: "PUT",
             headers: {
                 "content-type": "application/json"
@@ -41,7 +42,9 @@ const Modal = ({ modalData,verifyId }) => {
         <div >
             <dialog id="my_modal_3" className="modal">
                 <div className="modal-box">
-
+                    <div className='flex justify-end mb-3'>
+                        <button onClick={() => document.getElementById('my_modal_3').close()} className='btn  text-white'><RxCross1 color='black' size={25}/></button>
+                    </div>
                     <form onSubmit={handleUpdate} className='md:w-4/4 mx-auto bg-yellow-100 border-base-300 rounded-box  border p-4'>
                         <fieldset className="fieldset ">
                             <label className="label text-sm text-black font-semibold">Recipe Name</label>
@@ -104,7 +107,7 @@ const Modal = ({ modalData,verifyId }) => {
                             <label className="label text-sm text-black font-semibold">Categories</label>
                             <div className="grid grid-cols-2  gap-3 text-gray-700">
                                 <label className="flex items-center space-x-2">
-                                    <input type="checkbox" name='category[]' value="Breakfast" className="accent-green-600"/>
+                                    <input type="checkbox" name='category[]' value="Breakfast" className="accent-green-600" />
                                     <span>Breakfast</span>
                                 </label>
                                 <label className="flex items-center space-x-2">
@@ -131,10 +134,10 @@ const Modal = ({ modalData,verifyId }) => {
                         </fieldset>
 
                         <div className='mt-3'>
-                          
+
                             <div className='mt-4 flex justify-between'>
                                 <button className='btn bg-green-400 text-white'>Update Recipe</button>
-                                <button onClick={() => document.getElementById('my_modal_3').close()} className='btn bg-yellow-400 text-white'>Close</button>
+
                             </div>
                         </div>
 

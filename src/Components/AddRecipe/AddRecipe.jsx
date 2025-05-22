@@ -67,20 +67,20 @@ const AddRecipe = () => {
                 <form onSubmit={handleAddRecipe} className={`w-3/4 text-white mx-auto ${!themes ? 'bg-yellow-100 border border-base-300' : 'border border-white'}  rounded-box   p-4`}>
                     <fieldset className="fieldset ">
                         <label className={`label text-sm ${!themes && 'text-black'} font-semibold`}>Recipe Name</label>
-                        <input type="text" className={`input w-full `} required name='name' placeholder="Enter recipe name" />
+                        <input type="text" className={`input w-full ${!themes && 'text-black'}`} required name='name' placeholder="Enter recipe name" />
 
                     </fieldset>
 
                     <fieldset className="fieldset ">
                         <label className={`label text-sm ${!themes && 'text-black'}  font-semibold`}>Recipe Image</label>
-                        <input type="text" className="input w-full" required name='photo' placeholder="https://example.png/jpg" />
+                        <input type="text" className={`input w-full ${!themes && 'text-black'}`} required name='photo' placeholder="https://example.png/jpg" />
 
                     </fieldset>
 
                     <fieldset className="fieldset ">
                         <label className={`label text-sm ${!themes && 'text-black'}  font-semibold`}>Ingredients</label>
 
-                        <textarea rows={6} required className='bg-white border border-base-300 p-3' name="Ingredients" id="" placeholder='- 1 cup flour
+                        <textarea rows={6} required className={` border border-base-300 p-3 ${!themes && 'text-black bg-white'}`} name="Ingredients" id="" placeholder='- 1 cup flour
 - 2 eggs
 - 1 tsp salt'></textarea>
 
@@ -89,7 +89,7 @@ const AddRecipe = () => {
                     <fieldset className="fieldset ">
                         <label className={`label text-sm ${!themes && 'text-black'}  font-semibold`}>Instructions</label>
 
-                        <textarea name="Instructions" rows={3} required className='bg-white border border-base-300 p-2' id=""></textarea>
+                        <textarea name="Instructions" rows={3} required className={`${!themes && 'text-black bg-white'} border border-base-300 p-2`} id=""></textarea>
                     </fieldset>
 
                     <div className='md:flex items-center md:justify-between'>

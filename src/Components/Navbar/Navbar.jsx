@@ -1,4 +1,4 @@
-import React, { use } from 'react';
+import React, { use, useState } from 'react';
 import { Link, NavLink } from 'react-router';
 import { AuthContext } from '../../Context/AuthContext';
 import { signOut } from 'firebase/auth';
@@ -10,7 +10,7 @@ const Navbar = () => {
 
     const userInfo = use(AuthContext);
     const { user, themes, setThemes } = userInfo;
-
+    const [tooltipSet, setTooltipSet] = useState(false)
     // console.log(user?.displayName)
     // console.log(user?.photoURL)
 
@@ -32,6 +32,8 @@ const Navbar = () => {
             })
     }
 
+
+
     // console.log(user)
     const links = <>
         <NavLink to={'/'}><li>Home</li></NavLink>
@@ -51,8 +53,15 @@ const Navbar = () => {
                         </div>
                         <ul
                             tabIndex={0}
-                            className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
+                            className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-96 h-40 p-2 shadow">
+
                             {links}
+                           <div className='flex justify-end'>
+                             <button onClick={handleLogOut} className="btn mt-2 w-2/4 text-yellow-400 text-lg bg-white border-yellow-400 font-bold">Logout</button>
+                           </div>
+
+
+
                         </ul>
                     </div>
                     <a className=" text-3xl font-bold text-yellow-400">Yummiary</a>
@@ -94,14 +103,19 @@ const Navbar = () => {
 
                             <div className='flex items-center gap-2'>
                                 {
-                                    user?.photoURL && <img className='w-10 h-10 rounded-full' src={user?.photoURL} alt="" />
+                                    user?.photoURL &&
+
+                                    <div className={`tooltip ${tooltipSet && 'tooltip-open'} tooltip-bottom tooltip-close`} data-tip={user.displayName}>
+                                        <button onClick={() => setTooltipSet(!tooltipSet)} className=""> <img className=' w-10 h-10 rounded-full' src={user?.photoURL} alt="" /></button>
+                                    </div>
+
                                 }
 
-                                <button onClick={handleLogOut} className="btn bg-yellow-400 text-white font-bold">Logout</button>
+                                <button onClick={handleLogOut} className="btn hidden md:flex bg-yellow-400 text-white font-bold">Logout</button>
                             </div>
 
                             :
-                            <div>
+                            <div className='flex items-center gap-1'>
                                 <Link to={'/login'}><button className="btn bg-yellow-400 text-white font-bold">Login</button></Link>
                                 <Link to={'/register'}><button className="btn bg-yellow-400 text-white font-bold">Register</button></Link>
                             </div>
