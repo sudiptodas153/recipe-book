@@ -53,6 +53,7 @@ const RecipeDetails = () => {
         feedbackData.userEmail = user.email
         feedbackData.userPhoto = user.photoURL
         feedbackData.recipeName = name
+        feedbackData.recipeCuisine = cuisine
         // console.log(feedbackData)
 
         fetch('https://recipe-database-zeta.vercel.app/feedback', {

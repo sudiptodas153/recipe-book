@@ -11,6 +11,8 @@ const AuthContextProvider = ({ children }) => {
     const [user, setUser] = useState(null)
     const [themes, setThemes] = useState(false)
 
+    console.log(themes)
+
 
     const createUser = (email, pass) => {
         setLoading(true);

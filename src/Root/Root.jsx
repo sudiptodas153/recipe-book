@@ -13,7 +13,7 @@ const Root = () => {
     return (
         <div className='' data-theme={`${themes? 'dark' : ''}`}>
             <Navbar></Navbar>
-            <div className='mb-80'>
+            <div className=''>
                 <Outlet></Outlet>
             </div>
             <Footer></Footer>
