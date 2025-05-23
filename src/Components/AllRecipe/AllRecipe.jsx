@@ -1,6 +1,7 @@
 import React, { use, useEffect, useState } from 'react';
 import { Link, useLoaderData } from 'react-router';
 import { AuthContext } from '../../Context/AuthContext';
+import { Slide, Zoom } from 'react-awesome-reveal';
 
 const AllRecipe = () => {
     const data = useLoaderData();
@@ -56,6 +57,7 @@ const AllRecipe = () => {
                 {
                     filteredData.map(resp =>
                         <div key={resp._id} className=''>
+                            <Zoom>
                             <div className={`card border border-gray-500 md:h-[400px] ${!themes && 'bg-yellow-50'} shadow-sm p-3`}>
 
                                 <img
@@ -80,6 +82,7 @@ const AllRecipe = () => {
                                     </div>
                                 </div>
                             </div>
+                            </Zoom>
                         </div>)
                 }
             </div>

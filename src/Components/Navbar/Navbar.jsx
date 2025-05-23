@@ -6,8 +6,9 @@ import { auth } from '../../Firebase/Firebase';
 import './nav.css'
 import Swal from 'sweetalert2';
 import { MdOutlineWbSunny } from 'react-icons/md';
-import { IoMdMoon } from 'react-icons/io';
 import { IoMoonOutline } from 'react-icons/io5';
+import { Typewriter } from 'react-simple-typewriter';
+import icon from '../../assets/icon.png'
 
 const Navbar = () => {
 
@@ -74,7 +75,22 @@ const Navbar = () => {
 
                         </ul>
                     </div>
-                    <a className=" text-3xl font-bold text-yellow-400">Yummiary</a>
+
+                    <div className='md:flex items-center'>
+                        <img className='hidden md:flex w-20 mt-5' src={icon} alt="" />
+                        <h2 className=" text-3xl font-bold text-yellow-400">
+                            <Typewriter
+                                words={['Yummiary']}
+                                loop={Infinity}
+                                cursor
+                                cursorStyle='...'
+                                typeSpeed={300}
+                                deleteSpeed={100}
+                                delaySpeed={2000}
+                            />
+                        </h2>
+                    </div>
+
                 </div>
                 <div className="navbar-center hidden lg:flex">
                     <ul className="menu font-bold menu-horizontal gap-8 px-1">
@@ -106,8 +122,8 @@ const Navbar = () => {
                                     user?.photoURL &&
 
                                     <div className='relative'>
-                                        <img onClick={()=>setTooltipSet(!tooltipSet)} className=' w-10 h-10 rounded-full' src={user?.photoURL} alt="" />
-                                        <p className={`absolute rounded-lg font-bold text-white bg-rose-600 px-3 ${tooltipSet ?'-right-3 top-13' :'-top-20' }`}>{user.displayName}</p>
+                                        <img onClick={() => setTooltipSet(!tooltipSet)} className=' w-10 h-10 rounded-full' src={user?.photoURL} alt="" />
+                                        <p className={`absolute rounded-lg font-bold text-white bg-rose-600 px-3 ${tooltipSet ? '-right-3 top-13' : '-top-20'}`}>{user.displayName}</p>
                                     </div>
                                 }
 

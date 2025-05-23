@@ -2,6 +2,7 @@ import React, { use } from 'react';
 import { RxCross1 } from 'react-icons/rx';
 import { AuthContext } from '../../Context/AuthContext';
 import Swal from 'sweetalert2';
+import {Zoom } from 'react-awesome-reveal';
 
 const UserFeedback = ({ feedback, setFeedback }) => {
 
@@ -51,7 +52,7 @@ const UserFeedback = ({ feedback, setFeedback }) => {
 
                 {
                     feedback?.map(feed => <div key={feed._id}>
-
+                        <Zoom>
                         <div className='border border-gray-200 p-4 rounded-lg'>
                             {
                                 user?.email === 'dadrupu@gmail.com' &&
@@ -59,8 +60,8 @@ const UserFeedback = ({ feedback, setFeedback }) => {
                                     <button onClick={() => handleDelate(feed._id)} className=''><RxCross1 color='red' /></button>
                                 </div>
                             }
-                            <div className='flex border-b border-gray-300 pb-4 items-center justify-between'>
-                                <div className='flex gap-4 items-center'>
+                            <div className='md:flex border-b border-gray-300 pb-4 items-center justify-between'>
+                                <div className='flex gap-4 mb-3 items-center'>
                                     <div>
                                         <img className='rounded-full h-16 w-16' src={feed.userPhoto} alt="" />
                                     </div>
@@ -74,10 +75,12 @@ const UserFeedback = ({ feedback, setFeedback }) => {
                                     <p className='font-semibold text-xl'>Cuisine: {feed.recipeCuisine}</p>
                                 </div>
                             </div>
+
                             <div className='mt-3'>
                                 <p>{feed.feedback}</p>
                             </div>
                         </div>
+                        </Zoom>
                     </div>)
                 }
             </div>

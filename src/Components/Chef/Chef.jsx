@@ -1,6 +1,7 @@
 import React, { use } from 'react';
 import { AuthContext } from '../../Context/AuthContext';
 import Swal from 'sweetalert2';
+import { JackInTheBox, Slide } from 'react-awesome-reveal';
 
 const Chef = ({ chefData, setChefData }) => {
 
@@ -55,30 +56,34 @@ const Chef = ({ chefData, setChefData }) => {
             <div className='grid grid-cols-1 md:grid-cols-3 mt-8 gap-5'>
                 {
                     chefData?.map(chef => <div key={chef._id}>
-                        <div className="card border border-gray-400 p-5 shadow-sm">
+                        <JackInTheBox  duration={2000}>
+                            <div className="card border border-gray-400 p-5 shadow-sm">
 
-                            <div className='flex justify-center'>
-                                <img className='rounded-full border border-l-violet-500 border-t-lime-500 border-r-yellow-500 border-b-pink-500 p-2 w-52 h-52'
-                                    src={chef.photo}
-                                    alt="Shoes" />
-                            </div>
-
-                            <div className="mt-4">
-                                <h2 className="text-2xl font-bold">Chef Name: {chef.name}</h2>
-
-                                <div className="flex justify-between mt-3">
-                                    <div className="border bg-green-50 border-green-500 px-3 rounded-xl  text-green-500 text-sm font-bold">Experience: {chef.experience} Years</div>
-                                    <div className="border text-sm bg-pink-50 border-pink-500 px-3 rounded-xl  text-pink-500 font-bold">{chef.dish}</div>
+                                <div className='flex justify-center'>
+                                    <img className='rounded-full border border-l-violet-500 border-t-lime-500 border-r-yellow-500 border-b-pink-500 p-2 w-52 h-52'
+                                        src={chef.photo}
+                                        alt="Shoes" />
                                 </div>
-                                <div className=''>
-                                    <p className='mt-3 font-semibold text-lg'>Special Cuisine: {chef.cuisine}</p>
-                                    {
-                                        user?.email === 'dadrupu@gmail.com' &&
-                                        <button onClick={() => handleDelete(chef._id)} className='btn mt-2 bg-red-600 font-bold text-white'>Delete</button>
-                                    }
+
+                                <div className="mt-4">
+
+                                    <h2 className="text-2xl font-bold">Chef Name: {chef.name}</h2>
+
+
+                                    <div className="flex justify-between mt-3">
+                                        <div className="border bg-green-50 border-green-500 px-3 rounded-xl  text-green-500 text-sm font-bold">Experience: {chef.experience} Years</div>
+                                        <div className="border text-sm bg-pink-50 border-pink-500 px-3 rounded-xl  text-pink-500 font-bold">{chef.dish}</div>
+                                    </div>
+                                    <div className=''>
+                                        <p className='mt-3 font-semibold text-lg'>Special Cuisine: {chef.cuisine}</p>
+                                        {
+                                            user?.email === 'dadrupu@gmail.com' &&
+                                            <button onClick={() => handleDelete(chef._id)} className='btn mt-2 bg-red-600 font-bold text-white'>Delete</button>
+                                        }
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        </JackInTheBox>
                     </div>)
                 }
             </div>

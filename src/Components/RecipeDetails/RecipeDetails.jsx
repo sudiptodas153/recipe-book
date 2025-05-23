@@ -3,6 +3,7 @@ import { AiFillLike } from 'react-icons/ai';
 import { useLoaderData } from 'react-router';
 import { AuthContext } from '../../Context/AuthContext';
 import Swal from 'sweetalert2';
+import { Fade } from 'react-awesome-reveal';
 
 const RecipeDetails = () => {
     const data = useLoaderData()
@@ -81,6 +82,7 @@ const RecipeDetails = () => {
         <div className='my-10 w-11\12 mx-auto px-3'>
             <title>Recipe Details</title>
             <div className=''>
+                 <Fade duration={3000}>
                 <div className='md:flex items-center space-y-3 md:-space-y-3 gap-8'>
                     <img className='md:w-3/6 md:h-[500px] rounded-lg' src={photo} alt="" />
                     <div className='space-y-3'>
@@ -117,6 +119,7 @@ const RecipeDetails = () => {
                         </div>
                     </div>
                 </div>
+               
                 <div className='mt-10 md:mt-20'>
                     <h2 className='text-2xl md:text-4xl font-bold text-center'>Feedback About this Recipe</h2>
 
@@ -128,6 +131,7 @@ const RecipeDetails = () => {
 
                     </form>
                 </div>
+                </Fade>
             </div>
         </div>
     );
