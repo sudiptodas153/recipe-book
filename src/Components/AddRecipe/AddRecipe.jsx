@@ -5,7 +5,7 @@ import Swal from 'sweetalert2';
 import { AuthContext } from '../../Context/AuthContext';
 
 const AddRecipe = () => {
-    const {user,themes} = use(AuthContext);
+    const { user, themes } = use(AuthContext);
 
     // console.log(user.email)
     const [likes, setLikes] = useState(0);
@@ -22,7 +22,7 @@ const AddRecipe = () => {
         recipeData.userEmail = user.email
         recipeData.category = categories;
         recipeData.like = likes
-        console.log(recipeData)
+        // console.log(recipeData)
 
 
         fetch('https://recipe-database-zeta.vercel.app/recipes', {

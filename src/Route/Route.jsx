@@ -11,6 +11,7 @@ import PrivateRoute from "../PrivateRoute/PrivateRoute";
 import MyRecipe from "../Components/MyRecipe/MyRecipe";
 import AllRecipe from "../Components/AllRecipe/AllRecipe";
 import Loader from "../Components/Loader/Loader";
+import AddChef from "../Components/AddChef/AddChef";
 
 
 
@@ -60,6 +61,11 @@ export const router = createBrowserRouter([
                 hydrateFallbackElement: <Loader></Loader>,
                 element: <PrivateRoute><RecipeDetails></RecipeDetails></PrivateRoute>
             },
+            {
+                path: 'add-Chef',
+                hydrateFallbackElement: <Loader></Loader>,
+                Component: AddChef
+            }
 
         ]
     },

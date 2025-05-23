@@ -39,8 +39,12 @@ const Navbar = () => {
         <NavLink to={'/'}><li>Home</li></NavLink>
         <NavLink to={'/all-recipe'}><li>All Recipes</li></NavLink>
         <NavLink to={'/add-recipe'}><li>Add Recipe</li></NavLink>
-
         <NavLink to={'/my-recipes'}><li>My Recipes</li></NavLink>
+        {
+            user?.email === 'dadrupu@gmail.com' &&
+            <NavLink to={'/add-Chef'}><li>Add New Chef</li></NavLink>
+        }
+
     </>
 
     return (
@@ -56,9 +60,12 @@ const Navbar = () => {
                             className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-96 h-40 p-2 shadow">
 
                             {links}
-                           <div className='flex justify-end'>
-                             <button onClick={handleLogOut} className="btn mt-2 w-2/4 text-yellow-400 text-lg bg-white border-yellow-400 font-bold">Logout</button>
-                           </div>
+                            {
+                                user &&
+                                <div className='flex justify-end'>
+                                    <button onClick={handleLogOut} className="btn mt-2 w-2/4 text-yellow-400 text-lg bg-white border-yellow-400 font-bold">Logout</button>
+                                </div>
+                            }
 
 
 

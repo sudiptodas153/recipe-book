@@ -9,7 +9,7 @@ const Recipes = ({ recipe }) => {
 
     return (
         <div>
-            <div className={`card border border-gray-500 ${!themes ? 'bg-yellow-50' :''} md:w-96 shadow-sm p-3`}>
+            <div className={`card border border-gray-500 ${!themes ? 'bg-yellow-50' :''}  shadow-sm p-3`}>
 
                 <img
                     src={photo}

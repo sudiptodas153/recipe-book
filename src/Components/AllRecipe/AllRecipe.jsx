@@ -19,7 +19,7 @@ const AllRecipe = () => {
 
     const handleSelect = (e) => {
         setSort(e.target.value);
-        console.log(e.target.value)
+        // console.log(e.target.value)
     };
 
 
@@ -29,7 +29,7 @@ const AllRecipe = () => {
             <div className='md:flex md:gap-[340px] items-center mb-8'>
 
                 <select value={sort}
-                    onChange={handleSelect} className="select w-40 select-info">
+                    onChange={handleSelect} className="select w-40 select-info hidden md:flex">
 
                     <option value="All">All</option>
                     <option value="Italian">Italian</option>
@@ -39,6 +39,18 @@ const AllRecipe = () => {
                     <option value="Others">Others</option>
                 </select>
                 <h2 className='text-center my-8 text-4xl font-bold'>All Recipe</h2>
+            </div>
+            <div className='md:hidden mb-6'>
+                <select value={sort}
+                    onChange={handleSelect} className="select w-40 select-info ">
+
+                    <option value="All">All</option>
+                    <option value="Italian">Italian</option>
+                    <option value="Mexican">Mexican</option>
+                    <option value="Indian">Indian</option>
+                    <option value="Chinese">Chinese</option>
+                    <option value="Others">Others</option>
+                </select>
             </div>
             <div className='grid grid-cols-1 md:grid-cols-4 gap-4'>
                 {

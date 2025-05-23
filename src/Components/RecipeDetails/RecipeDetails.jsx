@@ -2,6 +2,7 @@ import React, { use, useState } from 'react';
 import { AiFillLike } from 'react-icons/ai';
 import { useLoaderData } from 'react-router';
 import { AuthContext } from '../../Context/AuthContext';
+import Swal from 'sweetalert2';
 
 const RecipeDetails = () => {
     const data = useLoaderData()
@@ -12,8 +13,8 @@ const RecipeDetails = () => {
 
     const [likes, setLikes] = useState(like)
 
-    console.log(likes)
-    console.log(data)
+    // console.log(likes)
+    // console.log(data)
 
     const handelLike = () => {
         setLikes(likes + 1)
@@ -43,6 +44,36 @@ const RecipeDetails = () => {
     }
 
 
+    const handleFeedback = e => {
+        e.preventDefault();
+        const form = e.target;
+        const formData = new FormData(form);
+        const feedbackData = Object.fromEntries(formData.entries());
+        feedbackData.userName = user.displayName
+        feedbackData.userEmail = user.email
+        feedbackData.userPhoto = user.photoURL
+        feedbackData.recipeName = name
+        // console.log(feedbackData)
+
+        fetch('https://recipe-database-zeta.vercel.app/feedback', {
+            method: "POST",
+            headers: {
+                "content-type": "application/json"
+            },
+            body: JSON.stringify(feedbackData)
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.insertedId) {
+                    Swal.fire({
+                        title: "Thank you for your feedback",
+                        icon: "success",
+                        draggable: true
+                    });
+                    form.reset();
+                }
+            })
+    }
 
 
     return (
@@ -77,7 +108,7 @@ const RecipeDetails = () => {
                         <div className=''>
                             <form onSubmit={likeHandle}>
                                 <div>
-                                    <p className='font-semibold text-xl'><span className='font-bold'>Like:</span> {likes ?  likes : like}</p>
+                                    <p className='font-semibold text-xl'><span className='font-bold'>Like:</span> {likes ? likes : like}</p>
                                     <input type="text" name='like' />
                                 </div>
                                 <button onClick={handelLike} disabled={user?.email === userEmail} className={`btn mt-2 ${user?.email === userEmail ? 'cursor-not-allowed' : ''} bg-yellow-400 text-white font-bold`}><AiFillLike />Like Now</button>
@@ -85,7 +116,17 @@ const RecipeDetails = () => {
                         </div>
                     </div>
                 </div>
+                <div className='mt-10 md:mt-20'>
+                    <h2 className='text-2xl md:text-4xl font-bold text-center'>Feedback About this Recipe</h2>
 
+                    <form onSubmit={handleFeedback}>
+                        <fieldset className="fieldset mt-5">
+                            <textarea name="feedback" rows={5} required placeholder='Say something about this recipe......' className={`text-black  border rounded-lg border-gray-500 p-2 text-lg`} id=""></textarea>
+                        </fieldset>
+                        <button className='btn bg-yellow-400 font-bold text-white text-sm'>Submit</button>
+
+                    </form>
+                </div>
             </div>
         </div>
     );

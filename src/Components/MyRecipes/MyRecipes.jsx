@@ -13,7 +13,7 @@ const MyRecipes = () => {
     const [verifyId, setVerifyId] = useState(null);
     const [deleteHandle, setDeleteHandle] = useState(data)
 
-   
+
     useEffect(() => {
         //    const filtered =  data.filter(r=>r.userEmail === user.email);
         const filteredItems = deleteHandle.filter(item => item.userEmail === user?.email);
@@ -38,7 +38,11 @@ const MyRecipes = () => {
             <div className=''>
                 {
                     identifyByEmail.length > 0 &&
-                    <h2 className='text-3xl md:text-5xl font-bold text-center mb-5 md:mb-10'>My Recipe</h2>
+                    <div className='text-center mb-5 md:mb-10 space-y-3'>
+                        <h2 className='text-3xl md:text-5xl font-bold '>My Recipe</h2>
+                        <p className='text-gray-700'>Your personal space to save and share your favorite creations. Whether it's a family secret or your latest kitchen experiment, keep all your recipes in one place and revisit the magic anytime.</p>
+                    </div>
+
                 }
 
                 <div >
