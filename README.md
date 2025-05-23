@@ -1,12 +1,9 @@
-# React + Vite
+# Recipe Book
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**Live Site:** [https://recipe-book-202dc.web.app](https://recipe-book-202dc.web.app)
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+-  User-specific recipe filtering – each user can view and manage only their own recipes.
+-  Easy recipe editing via modal – edit recipes in a popup modal without page reload.
+-  User reviews and ratings – users can rate and review individual recipes.
+-  Beautiful recipe cards – each recipe is displayed in an attractive card with image and details.
+-  Fully responsive design – optimized for mobile, tablet, and desktop screens.
