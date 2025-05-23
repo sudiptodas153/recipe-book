@@ -3,7 +3,7 @@ import React from 'react';
 import { RxCross1 } from 'react-icons/rx';
 import Swal from 'sweetalert2';
 
-const Modal = ({ modalData, verifyId }) => {
+const Modal = ({ modalData, verifyId,fetchUpdatedRecipes }) => {
     // console.log(verifyId)
     const handleUpdate = e => {
         e.preventDefault();
@@ -33,6 +33,9 @@ const Modal = ({ modalData, verifyId }) => {
                         icon: "success",
                         draggable: true
                     });
+                    if(fetchUpdatedRecipes){
+                        fetchUpdatedRecipes()
+                    }
                 }
             })
 

@@ -7,6 +7,7 @@ import './nav.css'
 import Swal from 'sweetalert2';
 import { MdOutlineWbSunny } from 'react-icons/md';
 import { IoMdMoon } from 'react-icons/io';
+import { IoMoonOutline } from 'react-icons/io5';
 
 const Navbar = () => {
 
@@ -81,7 +82,7 @@ const Navbar = () => {
                     </ul>
                 </div>
                 <div className="navbar-end gap-2">
-                    <div className='hidden mt-2 md:flex'>
+                    <div className='mt-2 '>
                         <div>
                             {
                                 themes ?
@@ -90,7 +91,7 @@ const Navbar = () => {
                                     </div>
                                     :
                                     <div>
-                                        <button onClick={() => setThemes(!themes)}><IoMdMoon size={40} /></button>
+                                        <button onClick={() => setThemes(!themes)}><IoMoonOutline size={40} /></button>
                                     </div>
                             }
                         </div>
@@ -104,10 +105,10 @@ const Navbar = () => {
                                 {
                                     user?.photoURL &&
 
-                                    <div className={`tooltip ${tooltipSet && 'tooltip-open'} tooltip-bottom tooltip-close`} data-tip={user.displayName}>
-                                        <button onClick={() => setTooltipSet(!tooltipSet)} className=""> <img className=' w-10 h-10 rounded-full' src={user?.photoURL} alt="" /></button>
+                                    <div className='relative'>
+                                        <img onClick={()=>setTooltipSet(!tooltipSet)} className=' w-10 h-10 rounded-full' src={user?.photoURL} alt="" />
+                                        <p className={`absolute rounded-lg font-bold text-white bg-rose-600 px-3 ${tooltipSet ?'-right-3 top-13' :'-top-20' }`}>{user.displayName}</p>
                                     </div>
-
                                 }
 
                                 <button onClick={handleLogOut} className="btn hidden md:flex bg-yellow-400 text-white font-bold">Logout</button>

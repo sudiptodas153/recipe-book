@@ -67,8 +67,8 @@ const Chef = ({ chefData, setChefData }) => {
                                 <h2 className="text-2xl font-bold">Chef Name: {chef.name}</h2>
 
                                 <div className="flex justify-between mt-3">
-                                    <div className="border border-green-500 px-3 rounded-xl  text-green-500 text-sm font-bold">Experience: {chef.experience} Years</div>
-                                    <div className="border text-sm border-pink-500 px-3 rounded-xl  text-pink-500 font-bold">{chef.dish}</div>
+                                    <div className="border bg-green-50 border-green-500 px-3 rounded-xl  text-green-500 text-sm font-bold">Experience: {chef.experience} Years</div>
+                                    <div className="border text-sm bg-pink-50 border-pink-500 px-3 rounded-xl  text-pink-500 font-bold">{chef.dish}</div>
                                 </div>
                                 <div className=''>
                                     <p className='mt-3 font-semibold text-lg'>Special Cuisine: {chef.cuisine}</p>

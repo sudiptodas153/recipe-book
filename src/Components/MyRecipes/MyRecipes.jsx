@@ -22,6 +22,17 @@ const MyRecipes = () => {
     }, [deleteHandle, user?.email])
     // console.log(identifyByEmail)
 
+    const fetchUpdatedRecipes = () => {
+        fetch('https://recipe-database-zeta.vercel.app/recipes')
+            .then(res => res.json())
+            .then(data => {
+                setDeleteHandle(data); 
+                const filteredItems = data.filter(item => item.userEmail === user?.email);
+                setIdentifyByEmail(filteredItems); 
+            })
+           
+    };
+
     const handleModal = (data, _id) => {
         setModalData(data)
         setVerifyId(_id)
@@ -64,7 +75,7 @@ const MyRecipes = () => {
                         </div>
                     }
 
-                    <Modal modalData={modalData} verifyId={verifyId} ></Modal>
+                    <Modal modalData={modalData} fetchUpdatedRecipes={fetchUpdatedRecipes} verifyId={verifyId} ></Modal>
                 </div>
             </div>
         </div >
