@@ -61,13 +61,14 @@ const Navbar = () => {
                         </div>
                         <ul
                             tabIndex={0}
-                            className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-96 h-52 p-2 shadow">
+                            className="menu menu-sm dropdown-content border border-gray-300 bg-base-100 rounded-box z-1 mt-3 w-96 h-52 p-2 shadow">
 
                             {links}
                             {
                                 user &&
                                 <div className='flex justify-end'>
-                                    <button onClick={handleLogOut} className="btn mt-2 w-2/4 text-yellow-400 text-lg bg-white border-yellow-400 font-bold">Logout</button>
+                                    <Link to={'/'}>
+                                        <button onClick={handleLogOut} className="btn mt-2 w-2/4 text-yellow-400 text-lg bg-white border-yellow-400 font-bold">Logout</button></Link>
                                 </div>
                             }
 
@@ -98,7 +99,7 @@ const Navbar = () => {
                     </ul>
                 </div>
                 <div className="navbar-end gap-2">
-                    <div className='mt-2 '>
+                    <div className='mt-2 hidden md:flex '>
                         <div>
                             {
                                 themes ?
@@ -123,7 +124,7 @@ const Navbar = () => {
 
                                     <div className='relative'>
                                         <img onClick={() => setTooltipSet(!tooltipSet)} className=' w-10 h-10 rounded-full' src={user?.photoURL} alt="" />
-                                        <p className={`absolute rounded-lg font-bold text-white bg-rose-600 px-3 ${tooltipSet ? '-right-3 top-13' : '-top-20'}`}>{user.displayName}</p>
+                                        <p className={`absolute text-center rounded-lg font-bold text-white bg-rose-600 px-3 ${tooltipSet ? ' md:-right-3 right-2.5 top-13  md:top-13' : '-top-20'}`}>{user.displayName}</p>
                                     </div>
                                 }
 
@@ -133,7 +134,7 @@ const Navbar = () => {
                             :
                             <div className='flex items-center gap-1'>
                                 <Link to={'/login'}><button className="btn bg-yellow-400 text-white font-bold">Login</button></Link>
-                                <Link to={'/register'}><button className="btn bg-yellow-400 text-white font-bold">Register</button></Link>
+                                <Link to={'/register'}><button className="btn  bg-yellow-400 text-white font-bold">Register</button></Link>
                             </div>
                     }
                 </div>
