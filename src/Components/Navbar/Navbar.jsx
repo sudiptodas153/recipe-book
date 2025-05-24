@@ -129,7 +129,7 @@ const Navbar = () => {
 
                                     <div className='relative'>
                                         <img onClick={() => setTooltipSet(!tooltipSet)} className=' w-10 h-10 rounded-full' src={user?.photoURL} alt="" />
-                                        <p className={`absolute text-center rounded-lg font-bold text-white bg-rose-600 px-3 ${tooltipSet ? ' md:-right-3 right-11 top-3  md:top-13' : '-top-20'}`}>{user.displayName}</p>
+                                        <p className={`absolute md:w-30 text-center rounded-lg font-bold text-white bg-rose-600 px-3 ${tooltipSet ? ' md:-right-3 right-11 top-3  md:top-13' : '-top-80'}`}>{user.displayName}</p>
                                     </div>
                                 }
 

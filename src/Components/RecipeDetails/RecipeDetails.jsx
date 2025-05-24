@@ -112,7 +112,7 @@ const RecipeDetails = () => {
                             <form onSubmit={likeHandle}>
                                 <div>
                                     <p className='font-semibold text-xl'><span className='font-bold'>Like:</span> {likes ? likes : like}</p>
-                                    <input type="text" name='like' />
+                                    <input type="text" className='hidden' name='like' />
                                 </div>
                                 <button onClick={handelLike} disabled={user?.email === userEmail} className={`btn mt-2 ${user?.email === userEmail ? 'cursor-not-allowed' : ''} bg-yellow-400 text-white font-bold`}><AiFillLike />Like Now</button>
                             </form>
