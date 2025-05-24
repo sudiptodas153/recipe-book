@@ -9,14 +9,19 @@ import { MdOutlineWbSunny } from 'react-icons/md';
 import { IoMoonOutline } from 'react-icons/io5';
 import { Typewriter } from 'react-simple-typewriter';
 import icon from '../../assets/icon.png'
+import Loader from '../Loader/Loader';
 
 const Navbar = () => {
 
     const userInfo = use(AuthContext);
-    const { user, themes, setThemes } = userInfo;
+    const { user, themes, setThemes, loading } = userInfo;
     const [tooltipSet, setTooltipSet] = useState(false)
     // console.log(user?.displayName)
     // console.log(user?.photoURL)
+
+    if (loading) {
+        return <h2></h2>; 
+    }
 
     const handleLogOut = () => {
         signOut(auth)
@@ -52,8 +57,8 @@ const Navbar = () => {
     </>
 
     return (
-        <div className='container mx-auto  px-2'>
-            <div className="navbar bg-base-100 shadow-sm">
+        <div className=''>
+            <div className="navbar bg-base-100 ">
                 <div className="navbar-start">
                     <div className="dropdown">
                         <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -66,9 +71,9 @@ const Navbar = () => {
                             {links}
                             {
                                 user &&
-                                <div className='flex justify-end'>
+                                <div className=''>
                                     <Link to={'/'}>
-                                        <button onClick={handleLogOut} className="btn mt-2 w-2/4 text-yellow-400 text-lg bg-white border-yellow-400 font-bold">Logout</button></Link>
+                                        <button onClick={handleLogOut} className="btn mt-2 w-2/4 text-yellow-400  text-lg bg-white border-yellow-400 font-bold">Logout</button></Link>
                                 </div>
                             }
 
@@ -124,7 +129,7 @@ const Navbar = () => {
 
                                     <div className='relative'>
                                         <img onClick={() => setTooltipSet(!tooltipSet)} className=' w-10 h-10 rounded-full' src={user?.photoURL} alt="" />
-                                        <p className={`absolute text-center rounded-lg font-bold text-white bg-rose-600 px-3 ${tooltipSet ? ' md:-right-3 right-2.5 top-13  md:top-13' : '-top-20'}`}>{user.displayName}</p>
+                                        <p className={`absolute text-center rounded-lg font-bold text-white bg-rose-600 px-3 ${tooltipSet ? ' md:-right-3 right-11 top-3  md:top-13' : '-top-20'}`}>{user.displayName}</p>
                                     </div>
                                 }
 
