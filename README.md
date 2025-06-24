@@ -2,8 +2,58 @@
 
 **Live Site:** [https://recipe-book-202dc.web.app](https://recipe-book-202dc.web.app)
 
--  User-specific recipe filtering – each user can view and manage only their own recipes.
--  Easy recipe editing via modal – edit recipes in a popup modal without page reload.
--  User reviews and ratings – users can rate and review individual recipes.
--  Beautiful recipe cards – each recipe is displayed in an attractive card with image and details.
--  Fully responsive design – optimized for mobile, tablet, and desktop screens.
+---
+
+## Project Overview
+
+Recipe Book is a dynamic recipe management web application where users can browse, view, and interact with a collection of delicious recipes.  
+The project features a clean UI and leverages Firebase authentication for a secure login system.
+
+---
+
+## Screenshot
+
+![Recipe Book Screenshot](https://raw.githubusercontent.com/yourusername/yourrepo/main/path-to-screenshot.png)
+
+*Replace this link with your actual hosted image URL or uploaded screenshot path.*
+
+---
+
+## Technology Stack
+
+- React.js
+- Tailwind CSS
+- Firebase Authentication
+- React Router DOM
+- DaisyUI
+- Axios
+
+---
+
+## Key Features
+
+- User authentication using Firebase
+- View recipe details with ingredients and instructions
+- Responsive design with clean UI
+- Loading states and error handling
+- Conditional rendering for protected routes
+
+---
+
+## Dependencies
+
+- react
+- react-dom
+- react-router-dom
+- firebase
+- axios
+- tailwindcss
+- daisyui
+
+---
+
+## How to Run Locally
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/yourusername/your-recipe-repo.git
