@@ -53,7 +53,7 @@ The project features a clean UI and leverages Firebase authentication for a secu
    
 2. Navigate to the project folder:
    ```bash
-   cd your-recipe-repo
+   cd recipe-book
    
 3. Install dependencies:
    ```bash
