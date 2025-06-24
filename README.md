@@ -54,6 +54,16 @@ The project features a clean UI and leverages Firebase authentication for a secu
 2. Navigate to the project folder:
    ```bash
    cd your-recipe-repo
+   
+3. Install dependencies:
+   ```bash
+   npm install
+   
+4. Start the development server:
+   ```bash
+   npm run dev
+
+
 
 
 ## Endpoints Overview
