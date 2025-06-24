@@ -50,3 +50,8 @@ The project features a clean UI and leverages Firebase authentication for a secu
 1. Clone the repository:
    ```bash
    git clone https://github.com/sudiptodas153/recipe-book.git
+   
+2. Navigate to the project folder:
+   ```bash
+   cd your-recipe-repo
+
