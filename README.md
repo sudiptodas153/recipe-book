@@ -11,13 +11,6 @@ The project features a clean UI and leverages Firebase authentication for a secu
 
 ---
 
-## Screenshot
-
-![Recipe Book Screenshot](https://raw.githubusercontent.com/yourusername/yourrepo/main/path-to-screenshot.png)
-
-*Replace this link with your actual hosted image URL or uploaded screenshot path.*
-
----
 
 ## Technology Stack
 
@@ -56,4 +49,4 @@ The project features a clean UI and leverages Firebase authentication for a secu
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/your-recipe-repo.git
+   git clone https://github.com/sudiptodas153/recipe-book.git
