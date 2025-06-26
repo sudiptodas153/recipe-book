@@ -20,10 +20,7 @@ const Banner = () => {
 
     return (
 
-        <div className='my-10'>
-
-
-
+        <div className='mt-10 overflow-hidden '>
 
             <div className=''>
                 <Swiper
@@ -38,12 +35,12 @@ const Banner = () => {
                     }}
                    
                     modules={[Autoplay, Pagination]}
-                    className="mySwiper w-full overflow-hidden z-10"
+                    className="mySwiper w-full z-10"
                 >
-                    <SwiperSlide><img className='w-full h-[200px] md:h-[400px]' src={image} alt="" /></SwiperSlide>
-                    <SwiperSlide><img className='w-full h-[200px] md:h-[400px]' src={image2} alt="" /></SwiperSlide>
-                    <SwiperSlide><img className='w-full h-[200px] md:h-[400px]' src={image3} alt="" /></SwiperSlide>
-                    <SwiperSlide><img className='w-full h-[200px] md:h-[400px]' src={image4} alt="" /></SwiperSlide>
+                    <SwiperSlide><img className='w-full h-[200px] rounded-lg md:h-[400px]' src={image} alt="" /></SwiperSlide>
+                    <SwiperSlide><img className='w-full h-[200px] rounded-lg md:h-[400px]' src={image2} alt="" /></SwiperSlide>
+                    <SwiperSlide><img className='w-full h-[200px] rounded-lg md:h-[400px]' src={image3} alt="" /></SwiperSlide>
+                    <SwiperSlide><img className='w-full h-[200px] rounded-lg md:h-[400px]' src={image4} alt="" /></SwiperSlide>
                  
                    
                 </Swiper>

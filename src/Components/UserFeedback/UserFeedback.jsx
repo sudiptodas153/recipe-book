@@ -43,7 +43,7 @@ const UserFeedback = ({ feedback, setFeedback }) => {
 
 
     return (
-        <div className='md:w-11/12 mx-auto my-10 md:my-20'>
+        <div className='md:w-11/12 mx-auto'>
             <div className='text-center space-y-3'>
                 <h2 className='text-4xl font-bold'>Users Feedback</h2>
                 <p className={`${themes && 'text-white'} text-gray-700 md:px-10`}>Hear what our users have to say! From taste and presentation to overall experience, their reviews help us grow and inspire others to try new recipes. Your opinion matters and shapes the future of our kitchen.</p>

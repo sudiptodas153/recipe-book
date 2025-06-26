@@ -22,6 +22,12 @@ const TopRecipe = ({ data }) => {
                 }
             </div>
             <div className='flex justify-center'><Link to={'/all-recipe'}><button className='btn mt-5 bg-yellow-300 text-lg text-white font-bold'>See All Recipes</button></Link></div>
+
+
+
+
+
+            
         </div>
     );
 };

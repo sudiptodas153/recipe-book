@@ -5,6 +5,8 @@ import TopRecipe from '../TopRecipe/TopRecipe';
 import Chef from '../Chef/Chef';
 import { useEffect, useState } from 'react';
 import UserFeedback from '../UserFeedback/UserFeedback';
+import Healthy from '../Healthy/Healthy';
+import HomeCook from '../HomeCook/HomeCook';
 
 const Home = () => {
     const data = useLoaderData()
@@ -26,11 +28,13 @@ const Home = () => {
 
 
     return (
-        <div className='max-w-11/12 mx-auto md:space-y-10'>
+        <div className='max-w-11/12 mx-auto space-y-10 md:space-y-20'>
             <title>Home</title>
             <Banner></Banner>
             <TopRecipe data={data}></TopRecipe>
             <Chef chefData={chefData} setChefData={setChefData}></Chef>
+             <Healthy></Healthy>
+            <HomeCook></HomeCook>
             <UserFeedback feedback={feedback} setFeedback={setFeedback}></UserFeedback>
 
         </div>
