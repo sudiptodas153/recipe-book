@@ -12,7 +12,9 @@ const Root = () => {
 
     return (
         <div className='' data-theme={`${themes? 'dark' : ''}`}>
+            <div className=' sticky top-0 z-50'>
             <Navbar></Navbar>
+            </div>
             <div className=''>
                 <Outlet></Outlet>
             </div>

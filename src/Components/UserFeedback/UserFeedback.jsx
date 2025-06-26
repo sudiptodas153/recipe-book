@@ -6,7 +6,7 @@ import {Zoom } from 'react-awesome-reveal';
 
 const UserFeedback = ({ feedback, setFeedback }) => {
 
-    const { user } = use(AuthContext)
+    const { user, themes } = use(AuthContext)
 
     const handleDelate = (_id) => {
         Swal.fire({
@@ -46,7 +46,7 @@ const UserFeedback = ({ feedback, setFeedback }) => {
         <div className='md:w-11/12 mx-auto my-10 md:my-20'>
             <div className='text-center space-y-3'>
                 <h2 className='text-4xl font-bold'>Users Feedback</h2>
-                <p className='text-gray-700 md:px-10'>Hear what our users have to say! From taste and presentation to overall experience, their reviews help us grow and inspire others to try new recipes. Your opinion matters and shapes the future of our kitchen.</p>
+                <p className={`${themes && 'text-white'} text-gray-700 md:px-10`}>Hear what our users have to say! From taste and presentation to overall experience, their reviews help us grow and inspire others to try new recipes. Your opinion matters and shapes the future of our kitchen.</p>
             </div>
             <div className=' space-y-3 border border-gray-300 p-5 rounded-lg mt-10'>
 

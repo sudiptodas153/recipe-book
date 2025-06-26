@@ -10,7 +10,9 @@ const AuthContextProvider = ({ children }) => {
     const [loading, setLoading] = useState(true)
     const [user, setUser] = useState(null)
     const [themes, setThemes] = useState(false)
-
+    const [allData, setAllData] = useState([])
+    const [data, setData] = useState([])
+    const [identifyByEmail, setIdentifyByEmail] = useState([]);
     // console.log(themes)
 
 
@@ -39,6 +41,36 @@ const AuthContextProvider = ({ children }) => {
 
 
 
+useEffect(()=>{
+    fetch('https://recipe-database-zeta.vercel.app/recipes')
+    .then(res => res.json())
+    .then(data => setAllData(data))
+},[])
+
+
+
+useEffect(()=>{
+    fetch('https://recipe-database-zeta.vercel.app/recipes')
+    .then(res => res.json())
+    .then(data => setData(data))
+},[])
+
+
+
+useEffect(() => {
+       
+        const filteredItems = data.filter(item => item.userEmail === user?.email);
+        
+        setIdentifyByEmail(filteredItems);
+    }, [data, user?.email])
+
+
+
+
+
+
+
+
 
 
     useEffect(() => {
@@ -62,6 +94,8 @@ const AuthContextProvider = ({ children }) => {
         loading,
         themes,
         setThemes,
+        allData,
+        identifyByEmail,
     }
 
     return (

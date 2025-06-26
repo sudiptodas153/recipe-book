@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { use } from 'react';
 
 import { RxCross1 } from 'react-icons/rx';
 import Swal from 'sweetalert2';
+import { AuthContext } from '../../Context/AuthContext';
 
 const Modal = ({ modalData, verifyId,fetchUpdatedRecipes }) => {
+    const {themes} = use(AuthContext)
     // console.log(verifyId)
     const handleUpdate = e => {
         e.preventDefault();
@@ -46,11 +48,11 @@ const Modal = ({ modalData, verifyId,fetchUpdatedRecipes }) => {
             <dialog id="my_modal_3" className="modal">
                 <div className="modal-box">
                     <div className='flex justify-end mb-3'>
-                        <button onClick={() => document.getElementById('my_modal_3').close()} className='btn  text-white'><RxCross1 color='black' size={25}/></button>
+                        <button onClick={() => document.getElementById('my_modal_3').close()} className={`btn ${!themes && ' text-white'}`}><RxCross1 color={!themes && 'black'} size={25}/></button>
                     </div>
-                    <form onSubmit={handleUpdate} className='md:w-4/4 mx-auto bg-yellow-100 border-base-300 rounded-box  border p-4'>
+                    <form onSubmit={handleUpdate} className={`md:w-4/4 ${!themes && 'bg-yellow-100 '} mx-auto border-base-300 rounded-box  border p-4`}>
                         <fieldset className="fieldset ">
-                            <label className="label text-sm text-black font-semibold">Recipe Name</label>
+                            <label className={`label text-sm ${!themes && 'text-black'} font-semibold`}>Recipe Name</label>
                             <input type="text" className="input w-full" required name='name' defaultValue={modalData?.name && modalData.name} placeholder="Enter recipe name" />
 
 
@@ -60,32 +62,32 @@ const Modal = ({ modalData, verifyId,fetchUpdatedRecipes }) => {
                                         } */}
 
                         <fieldset className="fieldset ">
-                            <label className="label text-sm text-black font-semibold">Recipe Image</label>
+                            <label className={`label text-sm ${!themes && 'text-black'} font-semibold`}>Recipe Image</label>
                             <input type="text" defaultValue={modalData?.photo} className="input w-full" required name='photo' placeholder="https://example.png/jpg" />
 
                         </fieldset>
 
                         <fieldset className="fieldset ">
-                            <label className="label text-sm text-black font-semibold">Ingredients</label>
+                            <label className={`label text-sm ${!themes && 'text-black'} font-semibold`}>Ingredients</label>
 
                             <textarea rows={6} defaultValue={modalData?.
                                 Ingredients
-                            } required className='bg-white border border-base-300 p-3' name="Ingredients" id="" placeholder='- 1 cup flour
+                            } required className={`${!themes && 'bg-white'} border border-base-300 p-3`} name="Ingredients" id="" placeholder='- 1 cup flour
 - 2 eggs
 - 1 tsp salt'></textarea>
 
                         </fieldset>
 
                         <fieldset className="fieldset ">
-                            <label className="label text-sm text-black font-semibold">Instructions</label>
+                            <label className={`label text-sm ${!themes && 'text-black'} font-semibold`}>Instructions</label>
 
-                            <textarea name="Instructions" defaultValue={modalData?.Instructions} rows={3} required className='bg-white border border-base-300 p-2' id=""></textarea>
+                            <textarea name="Instructions" defaultValue={modalData?.Instructions} rows={3} required className={`${!themes && 'bg-white'} border border-base-300 p-2`} id=""></textarea>
                         </fieldset>
 
                         <div className='md:flex gap-4 items-center md:justify-between'>
                             <div>
                                 <fieldset className="fieldset">
-                                    <legend className="fieldset-legend text-sm text-black font-semibold">Cuisine Type</legend>
+                                    <legend className="fieldset-legend text-sm ${!themes && 'text-black'} font-semibold">Cuisine Type</legend>
                                     <select defaultValue={modalData?.cuisine} name='cuisine' className="select w-full">
                                         <option disabled={true}>Select Cuisine</option>
                                         <option>Italian</option>
@@ -99,7 +101,7 @@ const Modal = ({ modalData, verifyId,fetchUpdatedRecipes }) => {
                             </div>
                             <div>
                                 <fieldset className="fieldset ">
-                                    <label className="label text-sm text-black font-semibold">Preparation Time <span className='text-xs text-gray-500'>(in minutes)</span></label>
+                                    <label className={`label text-sm ${!themes && 'text-black'} font-semibold`}>Preparation Time <span className='text-xs text-gray-500'>(in minutes)</span></label>
                                     <input type="number" defaultValue={modalData?.time} name='time' required className="input w-20 " placeholder="0" />
 
                                 </fieldset>
@@ -107,7 +109,7 @@ const Modal = ({ modalData, verifyId,fetchUpdatedRecipes }) => {
                         </div>
 
                         <fieldset className="fieldset ">
-                            <label className="label text-sm text-black font-semibold">Categories</label>
+                            <label className={`label text-sm ${!themes && 'text-black'} font-semibold`}>Categories</label>
                             <div className="grid grid-cols-2  gap-3 text-gray-700">
                                 <label className="flex items-center space-x-2">
                                     <input type="checkbox" name='category[]' value="Breakfast" className="accent-green-600" />

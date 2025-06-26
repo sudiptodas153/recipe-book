@@ -12,6 +12,12 @@ import MyRecipe from "../Components/MyRecipe/MyRecipe";
 import AllRecipe from "../Components/AllRecipe/AllRecipe";
 import Loader from "../Components/Loader/Loader";
 import AddChef from "../Components/AddChef/AddChef";
+import About from "../Components/About/About";
+import Dashboard from "../Components/Dashboard/Dashboard";
+import Overview from "../Components/Dashboard/DashChildren/Overview/Overview";
+import AllRecipeDash from "../Components/Dashboard/DashChildren/AllRecipeDash/AllRecipeDash";
+import MyRecipeDash from "../Components/Dashboard/DashChildren/MyRecipeDash/MyRecipeDash";
+import AddRecipeDash from "../Components/Dashboard/DashChildren/AddRecipeDash/AddRecipeDash";
 
 
 
@@ -43,6 +49,11 @@ export const router = createBrowserRouter([
                 element: <PrivateRoute><AddRecipe></AddRecipe></PrivateRoute>
             },
             {
+                path: 'about',
+                hydrateFallbackElement: <Loader></Loader>,
+                Component: About
+            },
+            {
                 path: 'all-recipe',
                 loader: () => fetch('https://recipe-database-zeta.vercel.app/recipes'),
                 hydrateFallbackElement: <Loader></Loader>,
@@ -69,4 +80,33 @@ export const router = createBrowserRouter([
 
         ]
     },
+     {
+                path: '/dash',
+                hydrateFallbackElement: <Loader></Loader>,
+                element: <PrivateRoute><Dashboard></Dashboard></PrivateRoute>,
+                children: [
+                    {
+                        index: true,
+                        Component: Overview
+                    },
+                    {
+                       path: '/dash/all-recipeDash',
+                       loader: () => fetch('https://recipe-database-zeta.vercel.app/recipes'),
+                     hydrateFallbackElement: <Loader></Loader>,
+                     Component: AllRecipeDash
+                    },
+                    {
+                       path: '/dash/my-recipesDash',
+                     hydrateFallbackElement: <Loader></Loader>,
+                     Component: MyRecipeDash
+                    },
+                    {
+                       path: '/dash/add-recipeDash',
+                     hydrateFallbackElement: <Loader></Loader>,
+                     Component: AddRecipeDash
+                    },
+                   
+                ]
+            },
+
 ]);

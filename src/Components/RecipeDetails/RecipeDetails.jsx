@@ -9,7 +9,7 @@ const RecipeDetails = () => {
     const data = useLoaderData()
 
     const { _id, name, photo, userEmail, Ingredients, Instructions, cuisine, time, like, category } = data;
-    const { user } = use(AuthContext);
+    const { user, themes } = use(AuthContext);
 
 
     const [likes, setLikes] = useState(like)
@@ -125,7 +125,7 @@ const RecipeDetails = () => {
 
                     <form onSubmit={handleFeedback}>
                         <fieldset className="fieldset mt-5">
-                            <textarea name="feedback" rows={5} required placeholder='Say something about this recipe......' className={`text-black  border rounded-lg border-gray-500 p-2 text-lg`} id=""></textarea>
+                            <textarea name="feedback" rows={5} required placeholder='Say something about this recipe......' className={`${!themes && 'text-black'}  border rounded-lg border-gray-500 p-2 text-lg`} id=""></textarea>
                         </fieldset>
                         <button className='btn bg-yellow-400 font-bold text-white text-sm'>Submit</button>
 

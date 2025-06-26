@@ -2,9 +2,10 @@
 import { use, useState } from 'react';
 import { FaHeart, FaRegHeart } from 'react-icons/fa';
 import Swal from 'sweetalert2';
-import { AuthContext } from '../../Context/AuthContext';
+import { AuthContext } from '../../../../Context/AuthContext';
 
-const AddRecipe = () => {
+
+const AddRecipeDash = () => {
     const { user, themes } = use(AuthContext);
 
     // console.log(user.email)
@@ -62,7 +63,7 @@ const AddRecipe = () => {
 
 
     return (
-        <div className='container mx-auto my-10'>
+        <div className='container mx-auto'>
             <title>Add Recipe</title>
             <h2 className='text-center text-3xl font-bold'>Add Recipe</h2>
             <div className='mt-10'>
@@ -166,4 +167,4 @@ const AddRecipe = () => {
     );
 };
 
-export default AddRecipe;
+export default AddRecipeDash;

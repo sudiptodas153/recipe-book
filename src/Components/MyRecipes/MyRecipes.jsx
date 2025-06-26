@@ -7,7 +7,7 @@ import Modal from '../Modal/Modal';
 const MyRecipes = () => {
 
     const data = useLoaderData()
-    const { user } = use(AuthContext);
+    const { user, themes } = use(AuthContext);
     const [modalData, setModalData] = useState(null);
     const [identifyByEmail, setIdentifyByEmail] = useState([]);
     const [verifyId, setVerifyId] = useState(null);
@@ -15,22 +15,22 @@ const MyRecipes = () => {
 
 
     useEffect(() => {
-        //    const filtered =  data.filter(r=>r.userEmail === user.email);
+       
         const filteredItems = deleteHandle.filter(item => item.userEmail === user?.email);
-        // console.log(filteredItems)
+        
         setIdentifyByEmail(filteredItems);
     }, [deleteHandle, user?.email])
-    // console.log(identifyByEmail)
+  
 
     const fetchUpdatedRecipes = () => {
         fetch('https://recipe-database-zeta.vercel.app/recipes')
             .then(res => res.json())
             .then(data => {
-                setDeleteHandle(data); 
+                setDeleteHandle(data);
                 const filteredItems = data.filter(item => item.userEmail === user?.email);
-                setIdentifyByEmail(filteredItems); 
+                setIdentifyByEmail(filteredItems);
             })
-           
+
     };
 
     const handleModal = (data, _id) => {
@@ -51,7 +51,7 @@ const MyRecipes = () => {
                     identifyByEmail.length > 0 &&
                     <div className='text-center mb-5 md:mb-10 space-y-3'>
                         <h2 className='text-3xl md:text-5xl font-bold '>My Recipe</h2>
-                        <p className='text-gray-700'>Your personal space to save and share your favorite creations. Whether it's a family secret or your latest kitchen experiment, keep all your recipes in one place and revisit the magic anytime.</p>
+                        <p className={`${!themes && 'text-gray-700'}`}>Your personal space to save and share your favorite creations. Whether it's a family secret or your latest kitchen experiment, keep all your recipes in one place and revisit the magic anytime.</p>
                     </div>
 
                 }
@@ -67,7 +67,7 @@ const MyRecipes = () => {
                         </div>
                         :
                         <div className='flex justify-center'>
-                            < div className='text-center space-y-4 bg-amber-50 rounded-e-lg border border-gray-300 p-10 my-10 '>
+                            < div className={`text-center space-y-4 ${!themes && 'bg-amber-50'} rounded-lg border border-gray-300 p-10 my-10 `}>
                                 <h2 className='text-4xl font-bold text-yellow-300'>No Recipe added here.</h2>
                                 <h2 className='text-xl font-bold text-yellow-300'>If you want to add Recipe.</h2>
                                 <Link to={'/add-recipe'}><button className='btn bg-yellow-300 text-white text-lg'>Add Recipe</button></Link>

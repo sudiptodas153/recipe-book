@@ -51,7 +51,7 @@ const Recipes = ({ recipe }) => {
                     <img
                         src={photo}
                         alt="food"
-                        className="rounded-xl h-60 " />
+                        className="rounded-xl h-40 " />
 
                     <div className=" mt-4">
                         <h2 className="text-2xl font-bold">{name}</h2>

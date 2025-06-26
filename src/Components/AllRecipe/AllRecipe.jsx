@@ -60,7 +60,7 @@ const AllRecipe = () => {
 
 
     return (
-        <div className='w-11/12 mx-auto my-10'>
+        <div className='w-11/12 mx-auto my-10 overflow-scroll'>
 
             <div className='md:flex md:gap-[340px] items-center mb-8'>
 
@@ -108,7 +108,7 @@ const AllRecipe = () => {
                                         </div>
                                         <div className='flex items-center justify-between '>
                                             <p className='text-lg font-semibold'>Cuisine: <span className='font-semibold text-sm'>{resp.cuisine}</span></p>
-                                            <p className='text-lg font-semibold'>Like: <span className='font-semibold'>{resp.like}</span></p>
+                                            <p className='text-lg font-semibold'>Time: <span className='font-semibold'>{resp.time} min</span></p>
                                         </div>
 
                                         <div className=" mt-2">

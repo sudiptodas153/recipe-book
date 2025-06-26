@@ -5,7 +5,7 @@ import { JackInTheBox, Slide } from 'react-awesome-reveal';
 
 const Chef = ({ chefData, setChefData }) => {
 
-    const { user } = use(AuthContext);
+    const { user, themes } = use(AuthContext);
 
 
     const handleDelete = (_id) => {
@@ -48,7 +48,7 @@ const Chef = ({ chefData, setChefData }) => {
         <div className='md:w-11/12 mx-auto mt-10 md:mt-20'>
             <div className='text-center space-y-3'>
                 <h2 className='text-4xl font-bold'>Meet Our Top Chefs</h2>
-                <p className='text-gray-700'>Get introduced to the skilled chefs who craft the delicious recipes you love. With years of experience and a passion for cooking, they bring creativity and authenticity to every dish. Discover their stories and signature styles that make our kitchen truly special.
+                <p className={`${themes && 'text-white'} text-gray-700`}>Get introduced to the skilled chefs who craft the delicious recipes you love. With years of experience and a passion for cooking, they bring creativity and authenticity to every dish. Discover their stories and signature styles that make our kitchen truly special.
 
                 </p>
             </div>

@@ -6,7 +6,7 @@ import Swal from 'sweetalert2';
 const Login = () => {
  const navigate = useNavigate()
     const userInfo = use(AuthContext);
-    const { signUser, googleSignIn } = userInfo;
+    const { signUser, googleSignIn, themes } = userInfo;
 
     const loginUser = e => {
         e.preventDefault();
@@ -59,19 +59,19 @@ const Login = () => {
         <div className='flex justify-center my-20'>
             <title>Login</title>
 
-            <div className='bg-yellow-200 border-base-300 w-80 p-2 rounded-lg'>
+            <div className={`${!themes && 'bg-yellow-50'} ${themes && 'border-white'} border border-base-300 w-80 p-2 rounded-lg`}>
                 <form onSubmit={loginUser}>
                     <fieldset className="fieldset p-4">
                         <h2 className='text-center text-3xl font-bold mb-2'>Login</h2>
 
-                        <label className="label font-bold text-black">Email</label>
+                        <label className={`label font-bold ${!themes && 'text-black'}`}>Email</label>
                         <input type="email" required name='email' className="input" placeholder="Enter your email" />
 
-                        <label className="label font-bold text-black">Password</label>
+                        <label className={`label font-bold ${!themes && 'text-black'}`}>Password</label>
                         <input type="password" required name='password' className="input" placeholder="Enter your password" />
                         <p>Forget password?</p>
 
-                        <input className='btn w-full bg-green-500 border-none text-white' type="submit" value="Login" />
+                        <input className='btn w-full bg-yellow-400 border-none text-white' type="submit" value="Login" />
 
                         <div className='text-xs flex gap-1'><span>Don't have an account?</span> <Link to={'/register'}><p className='text-blue-600'>Register</p></Link></div>
 

@@ -11,7 +11,7 @@ const Register = () => {
 
     const userInfo = use(AuthContext);
     const navigate = useNavigate();
-    const { createUser, profileUpdate, user, setUser, googleSignIn } = userInfo;
+    const { createUser, profileUpdate, user, setUser, googleSignIn, themes } = userInfo;
 
 
     const handleRegister = e => {
@@ -155,21 +155,21 @@ const Register = () => {
     return (
         <div className='flex justify-center my-20'>
             <title>Register</title>
-            <div className='bg-yellow-200 w-80 p-4 rounded-lg'>
+            <div className={`${!themes && 'bg-yellow-50'}  ${themes && 'border border-white'} w-80 p-4 rounded-lg`}>
                 <form onSubmit={handleRegister}>
                     <fieldset className="fieldset  p-4">
                         <h2 className='text-center text-3xl font-bold mb-2'>Register</h2>
 
-                        <label className="label font-bold text-black">Name</label>
+                        <label className={`label font-bold ${!themes && 'text-black'}`}>Name</label>
                         <input type="text" required name='name' className="input" placeholder="Enter your name" />
 
-                        <label className="label font-bold text-black">Email</label>
+                        <label className={`label font-bold ${!themes && 'text-black'}`}>Email</label>
                         <input type="email" required name='email' className="input" placeholder="Enter your email" />
 
-                        <label className="label font-bold text-black">PhotoURL</label>
+                        <label className={`label font-bold ${!themes && 'text-black'}`}>PhotoURL</label>
                         <input type="text" required name='photo' className="input" placeholder="https://Example.png" />
 
-                        <label className="label font-bold text-black">Password</label>
+                        <label className={`label font-bold ${!themes && 'text-black'}`}>Password</label>
                         <input type="password" required name='password' className="input" placeholder="Enter your password" />
                         {
                             passCheck ? <p className='text-[10px] text-red-600 font-bold'>Must have an Uppercase letter in the password.
@@ -186,7 +186,7 @@ const Register = () => {
 
 
 
-                        <button type='submit' className='btn w-full bg-green-500 border-none text-white' >Register</button>
+                        <button type='submit' className='btn w-full bg-yellow-400 border-none text-white' >Register</button>
 
                         <span className='text-xs flex gap-1 mt-1'>Don't have an account? <Link to={'/login'}><p className='text-blue-600'>Login</p></Link></span>
 
