@@ -56,7 +56,6 @@ useEffect(()=>{
 },[])
 
 
-
 useEffect(() => {
        
         const filteredItems = data.filter(item => item.userEmail === user?.email);
@@ -67,7 +66,16 @@ useEffect(() => {
 
 
 
+const fetchUpdatedRecipes = () => {
+        fetch('https://recipe-database-zeta.vercel.app/recipes')
+            .then(res => res.json())
+            .then(data => {
+                setData(data);
+                const filteredItems = data.filter(item => item.userEmail === user?.email);
+                setIdentifyByEmail(filteredItems);
+            })
 
+    };
 
 
 
@@ -96,6 +104,9 @@ useEffect(() => {
         setThemes,
         allData,
         identifyByEmail,
+        fetchUpdatedRecipes,
+        data,
+        setData
     }
 
     return (
